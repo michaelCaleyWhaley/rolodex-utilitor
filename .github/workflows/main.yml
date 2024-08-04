@@ -9,6 +9,7 @@ env:
   AWS_DEFAULT_REGION: "eu-west-2"
 jobs:
   build-deploy:
+    environment: prod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

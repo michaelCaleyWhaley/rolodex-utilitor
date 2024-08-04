@@ -1,0 +1,58 @@
+name: Build and deploy website
+on:
+  push:
+    branches:
+      - master
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: "eu-west-2"
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # - name: install
+      #   id: install
+      #   run: make npm/install
+      #   continue-on-error: false
+
+      # - name: lint
+      #   id: lint
+      #   run: make lint/application
+      #   continue-on-error: false
+
+      # - name: test
+      #   id: test
+      #   run: make test/application
+      #   continue-on-error: false
+
+      # - name: build
+      #   id: build
+      #   run: make build/application
+      #   continue-on-error: false
+
+      # - name: rewrite
+      #   id: rewrite
+      #   run: make rewrite/extension
+      #   continue-on-error: false
+
+      # - name: clear s3
+      #   id: clear
+      #   run: make s3/clean
+      #   continue-on-error: false
+
+      # - name: sync html files
+      #   id: synchtml
+      #   run: make s3/push/html
+      #   continue-on-error: false
+
+      # - name: sync remaining files
+      #   id: syncremaining
+      #   run: make s3/push/remaining
+      #   continue-on-error: false
+      
+      # - name: refresh cloudfront
+      #   id: cloudfront
+      #   run: make cloudfront/cache/refresh

@@ -8,15 +8,18 @@ server/zip:
 	zip deployment.zip bootstrap
 
 aws/lambda/update/actions:
-	@zip_file_path="${GITHUB_WORKSPACE}/server/deployment.zip"; \
+	@zip_file_path="${GITHUB_WORKSPACE}/deployment.zip"; \
 	aws lambda update-function-code \
 		--region eu-west-2 \
 		--function-name rolodex_utilitor_function \
 		--zip-file "fileb://$${zip_file_path}"
 
 aws/lambda/update/local:
-	@zip_file_path="./server/deployment.zip"; \
+	@zip_file_path="./deployment.zip"; \
 	aws lambda update-function-code \
 		--region eu-west-2 \
 		--function-name rolodex_utilitor_function \
 		--zip-file "fileb://$${zip_file_path}"
+
+test/test:
+	ls

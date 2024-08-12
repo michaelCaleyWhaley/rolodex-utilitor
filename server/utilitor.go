@@ -58,8 +58,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 
 	"github.com/aws/aws-lambda-go/lambda"
 )
@@ -74,24 +72,19 @@ type Body struct {
 
 type Response struct {
 	statusCode int64
-	body       []byte
+	body       map[string]any
 }
 
-func HandleRequest(ctx context.Context, event *MyEvent) Response {
-	// message := "Hello!"
-	// return &message, nil
-	fmt.Print("ctx")
-	fmt.Print(ctx)
-	jsonData, err := json.Marshal(Body{Message: "Hello!"})
-
-	if err != nil {
-		return Response{statusCode: 123, body: jsonData}
+func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
+	var data = map[string]any{
+		"username": "Random User",
+		"Age":      20,
 	}
 
 	return Response{
 		statusCode: 200,
-		body:       jsonData,
-	}
+		body:       data,
+	}, nil
 }
 
 func main() {

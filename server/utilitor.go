@@ -83,7 +83,7 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 	jsonData, err := json.Marshal(Body{Message: "Hello!"})
 
 	if err != nil {
-		return Response{statusCode: 123, body: jsonData}, nil
+		return Response{statusCode: 123, body: jsonData}, err
 	}
 
 	return Response{

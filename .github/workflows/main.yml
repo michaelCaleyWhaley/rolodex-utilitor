@@ -84,3 +84,9 @@ jobs:
         working-directory: ./server
         run: make server/zip
         continue-on-error: false
+
+      - name: Update lambda function
+        id: zip-binary
+        working-directory: ./server
+        run: aws/lambda/update/actions
+        continue-on-error: false

@@ -21,8 +21,6 @@ http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
 
 ## Todo
 
-- deploy cloudfront
-- direct root traffic to www
-- deploy go lambda
 - deploy api gateway
 - direct cloudfront origin to api gateway
+- how is local development going to work

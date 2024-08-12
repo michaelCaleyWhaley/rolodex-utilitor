@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "s3_read_permissions" {
 #   bucket = "rolodex-utilitor-website"
 
 #   tags = {
-#     Name = "code lab website bucket-redirect"
+#     Name = "rolodex website bucket-redirect"
 #   }
 # }
 
@@ -71,7 +71,7 @@ data "aws_iam_policy_document" "s3_read_permissions" {
 #   }
 # }
 
-# # manually enable public access on AWS
+# # # manually enable public access on AWS
 # resource "aws_s3_bucket_public_access_block" "access_block_redirect" {
 #   bucket = aws_s3_bucket.rolodex-utilitor-website-redirect.id
 
@@ -97,7 +97,7 @@ data "aws_iam_policy_document" "s3_read_permissions" {
 #     actions = [
 #       "s3:GetObject",
 #     ]
-#     resources = ["arn:aws:s3:::caleycodelab.com/*"]
+#     resources = ["arn:aws:s3:::test.com/*"]
 #   }
 # }
 

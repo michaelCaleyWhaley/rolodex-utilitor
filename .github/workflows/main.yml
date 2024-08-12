@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+###########################################################################
+############### Client
+###########################################################################
       - name: install
         id: install
         working-directory: ./client
@@ -59,7 +62,25 @@ jobs:
         working-directory: ./client
         run: make s3/push/remaining
         continue-on-error: false
-      
-      # - name: refresh cloudfront
-      #   id: cloudfront
-      #   run: make cloudfront/cache/refresh
+
+      - name: refresh cloudfront
+        id: cloudfront
+        working-directory: ./client
+        run: make cloudfront/cache/refresh
+        continue-on-error: false
+
+###########################################################################
+############### Server
+###########################################################################
+
+      - name: Build server binary
+        id: binary
+        working-directory: ./server
+        run: make server/build
+        continue-on-error: false
+
+      - name: Zip server binary
+        id: zip-binary
+        working-directory: ./server
+        run: make server/zip
+        continue-on-error: false

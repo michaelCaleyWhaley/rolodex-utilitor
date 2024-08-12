@@ -20,6 +20,3 @@ aws/lambda/update/local:
 		--region eu-west-2 \
 		--function-name rolodex_utilitor_function \
 		--zip-file "fileb://$${zip_file_path}"
-
-test/test:
-	ls

@@ -88,5 +88,5 @@ jobs:
       - name: Update lambda function
         id: update-lambda
         working-directory: ./server
-        run: aws/lambda/update/actions
+        run: make aws/lambda/update/actions
         continue-on-error: false

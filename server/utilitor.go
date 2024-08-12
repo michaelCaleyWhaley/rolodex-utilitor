@@ -71,19 +71,20 @@ type Body struct {
 }
 
 type Response struct {
-	statusCode int64
-	body       map[string]any
+	StatusCode int64 `json:statusCode`
+	Body       int64 `json:body`
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
-	var data = map[string]any{
-		"username": "Random User",
-		"Age":      20,
-	}
+	// var data = map[string]any{
+	// 	"statusCode": 123,
+	// 	"body":       20,
+	// }
 
+	// return data, nil
 	return Response{
-		statusCode: 200,
-		body:       data,
+		StatusCode: 200,
+		Body:       1234,
 	}, nil
 }
 

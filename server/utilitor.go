@@ -58,7 +58,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
 
 	"github.com/aws/aws-lambda-go/lambda"
 )
@@ -67,12 +67,29 @@ type MyEvent struct {
 	Name string `json:"name"`
 }
 
-func HandleRequest(ctx context.Context, event *MyEvent) (*string, error) {
-	if event == nil {
-		return nil, fmt.Errorf("received nil event")
+type Body struct {
+	Message string `json:message`
+}
+
+type Response struct {
+	statusCode int64
+	body       []byte
+}
+
+func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
+	// message := "Hello!"
+	// return &message, nil
+
+	jsonData, err := json.Marshal(Body{Message: "Hello!"})
+
+	if err != nil {
+		return Response{statusCode: 123, body: jsonData}, nil
 	}
-	message := fmt.Sprintf("Hello %s!", event.Name)
-	return &message, nil
+
+	return Response{
+		statusCode: 200,
+		body:       jsonData,
+	}, nil
 }
 
 func main() {

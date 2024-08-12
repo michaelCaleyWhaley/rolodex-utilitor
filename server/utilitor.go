@@ -77,7 +77,7 @@ type Response struct {
 	body       []byte
 }
 
-func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
+func HandleRequest(ctx context.Context, event *MyEvent) Response {
 	// message := "Hello!"
 	// return &message, nil
 	fmt.Print("ctx")
@@ -85,13 +85,13 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 	jsonData, err := json.Marshal(Body{Message: "Hello!"})
 
 	if err != nil {
-		return Response{statusCode: 123, body: jsonData}, nil
+		return Response{statusCode: 123, body: jsonData}
 	}
 
 	return Response{
 		statusCode: 200,
 		body:       jsonData,
-	}, nil
+	}
 }
 
 func main() {

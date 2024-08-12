@@ -86,7 +86,7 @@ jobs:
         continue-on-error: false
 
       - name: Update lambda function
-        id: zip-binary
+        id: update-lambda
         working-directory: ./server
         run: aws/lambda/update/actions
         continue-on-error: false

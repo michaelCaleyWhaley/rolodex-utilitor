@@ -58,6 +58,8 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -65,7 +67,11 @@ import (
 
 func HandleRequest(ctx context.Context, event events.LambdaFunctionURLRequest) (events.APIGatewayProxyResponse, error) {
 
-	return events.APIGatewayProxyResponse{Body: "{}", StatusCode: 200}, nil
+	data := map[string]string{"test": "test string"}
+	responseJSON, err := json.Marshal(data)
+	fmt.Println(err)
+
+	return events.APIGatewayProxyResponse{Body: string(responseJSON), StatusCode: 200}, nil
 }
 
 func main() {

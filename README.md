@@ -21,6 +21,6 @@ http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
 
 ## Todo
 
-- deploy api gateway
 - direct cloudfront origin to api gateway
-- how is local development going to work
+- integration hosted cognito
+- server sets jwt in http only cookie

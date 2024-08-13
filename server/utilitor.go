@@ -67,12 +67,12 @@ type MyEvent struct {
 }
 
 type Body struct {
-	Message string `json:message`
+	Message string `json:"message"`
 }
 
 type Response struct {
-	StatusCode int64 `json:statusCode`
-	Body       int64 `json:body`
+	statusCode int64
+	body       int64
 }
 
 func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
@@ -83,8 +83,8 @@ func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
 
 	// return data, nil
 	return Response{
-		StatusCode: 200,
-		Body:       1234,
+		statusCode: 200,
+		body:       1234,
 	}, nil
 }
 

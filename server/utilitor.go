@@ -59,6 +59,7 @@ package main
 import (
 	"context"
 
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
@@ -70,22 +71,15 @@ type Body struct {
 	Message string `json:"message"`
 }
 
-type Response struct {
-	statusCode int64
-	body       int64
-}
-
-func HandleRequest(ctx context.Context, event *MyEvent) (Response, error) {
+func HandleRequest(ctx context.Context, event events.LambdaFunctionURLRequest) (events.LambdaFunctionURLResponse, error) {
 	// var data = map[string]any{
 	// 	"statusCode": 123,
 	// 	"body":       20,
 	// }
 
 	// return data, nil
-	return Response{
-		statusCode: 200,
-		body:       1234,
-	}, nil
+
+	return events.LambdaFunctionURLResponse{Body: event.Body, StatusCode: 200}, nil
 }
 
 func main() {

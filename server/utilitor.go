@@ -64,7 +64,7 @@ import (
 )
 
 func HandleRequest(ctx context.Context, event events.LambdaFunctionURLRequest) (events.LambdaFunctionURLResponse, error) {
-	return events.LambdaFunctionURLResponse{Body: "{}", StatusCode: 200, Headers: map[string]string{"test": "test"}}, nil
+	return events.LambdaFunctionURLResponse{Body: "{}", StatusCode: 200, Headers: map[string]string{"test": "test"}, Cookies: []string{"test", "test1"}}, nil
 }
 
 func main() {

@@ -63,9 +63,9 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func HandleRequest(ctx context.Context, event events.LambdaFunctionURLRequest) (events.LambdaFunctionURLResponse, error) {
+func HandleRequest(ctx context.Context, event events.LambdaFunctionURLRequest) (events.APIGatewayProxyResponse, error) {
 
-	return events.LambdaFunctionURLResponse{Body: "{}", StatusCode: 200, Headers: map[string]string{"content-type": "application/json"}, Cookies: []string{"test", "test1"}}, nil
+	return events.APIGatewayProxyResponse{Body: "{}", StatusCode: 200}, nil
 }
 
 func main() {

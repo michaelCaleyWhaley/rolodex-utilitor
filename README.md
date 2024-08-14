@@ -23,8 +23,5 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- direct cloudfront origin to api gateway
-    - add api gateway as an origin
-    - add behaviour to direct traffic to gateway
 - integration hosted cognito
 - server sets jwt in http only cookie

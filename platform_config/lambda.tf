@@ -67,4 +67,10 @@ resource "aws_lambda_function" "rolodex_utilitor_function" {
   lifecycle {
     ignore_changes = [filename]
   }
+
+  environment {
+    variables = {
+      "GIN_MODE" = "release"
+    }
+  }
 }

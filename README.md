@@ -17,10 +17,11 @@ s3 bucket name for infrastructure `rolodex-utilitor-terraform-state`.
 
 michael_caley@******.com
 
-http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
+S3: http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
+API gateway: https://nh0hmn0bzk.execute-api.eu-west-2.amazonaws.com/deployed
+cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- direct cloudfront origin to api gateway
 - integration hosted cognito
 - server sets jwt in http only cookie

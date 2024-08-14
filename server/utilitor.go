@@ -18,13 +18,13 @@ func routes(r *gin.Engine) {
 		c.Header("Access-Control-Allow-Origin", "*")
 	})
 
-	r.GET("/", func(c *gin.Context) {
+	r.GET("/api", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
 
-	r.GET("/ping", func(c *gin.Context) {
+	r.GET("/api/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})

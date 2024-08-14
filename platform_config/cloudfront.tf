@@ -11,13 +11,32 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       http_port                = 80
       https_port               = 443
       origin_keepalive_timeout = 5
-      origin_protocol_policy   = "http-only"
+      origin_protocol_policy   = "https-only"
       origin_read_timeout      = 30
       origin_ssl_protocols = [
         "TLSv1.2",
       ]
     }
   }
+
+  origin {
+    domain_name = "nh0hmn0bzk.execute-api.eu-west-2.amazonaws.com"
+    origin_id   = "apigateway origin"
+    origin_path = "/deployed"
+
+    custom_origin_config {
+      http_port                = 80
+      https_port               = 443
+      origin_keepalive_timeout = 5
+      origin_protocol_policy   = "https-only"
+      origin_read_timeout      = 30
+      origin_ssl_protocols = [
+        "TLSv1.2",
+      ]
+    }
+  }
+
+
 
   enabled             = true
   is_ipv6_enabled     = true
@@ -52,6 +71,26 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     max_ttl                = 86400
   }
 
+  ordered_cache_behavior {
+    allowed_methods = [
+      "DELETE",
+      "GET",
+      "HEAD",
+      "OPTIONS",
+      "PATCH",
+      "POST",
+      "PUT",
+    ]
+    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    cached_methods = [
+      "GET",
+      "HEAD",
+    ]
+    path_pattern           = "/api/*"
+    target_origin_id       = "nh0hmn0bzk.execute-api.eu-west-2.amazonaws.com"
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
   price_class = "PriceClass_100"
 
   restrictions {
@@ -73,7 +112,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 #       http_port                = 80
 #       https_port               = 443
 #       origin_keepalive_timeout = 5
-#       origin_protocol_policy   = "http-only"
+#       origin_protocol_policy   = "https-only"
 #       origin_read_timeout      = 30
 #       origin_ssl_protocols = [
 #         "TLSv1.2",

@@ -23,5 +23,15 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- integration hosted cognito
+- use code to get access token and set access token in cookie
+- when access token goes stale use refresh token to fetch new access token
+- use access token to fetch user details
+- create jwt with secure user details in
 - server sets jwt in http only cookie
+
+https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin
+
+
+https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/oauth2/token?grant_type=authorization_code&code=91549b61-2b1b-4bb4-ad32-9e3bd56252dd&redirect_uri=http://localhost:3000/login
+
+https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html

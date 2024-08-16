@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -20,7 +21,7 @@ func routes(r *gin.Engine) {
 	})
 
 	r.POST("/api/code", func(c *gin.Context) {
-		// origin := c.Request.Header.Get("Origin")
+		origin := c.Request.Header.Get("Origin")
 		// requestBody := c.Request.Body
 
 		code, hasCode := c.GetPostForm("code")
@@ -28,10 +29,10 @@ func routes(r *gin.Engine) {
 		log.Println("code: ", code)
 		log.Println("hasCode: ", hasCode)
 
-		c.JSON(200, gin.H{"ping": "pong"})
+		// c.JSON(200, gin.H{"ping": "pong"})
 
-		// c.SetCookie("access_token", "test", 86400, "/", "/", true, true)
-		// c.Redirect(http.StatusFound, origin+"/dashboard")
+		c.SetCookie("access_token", "test", 86400, "/", "/", true, true)
+		c.Redirect(http.StatusFound, origin+"/dashboard")
 	})
 
 }

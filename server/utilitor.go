@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"log"
-	"net/http"
 	"os"
+	"utilitor/controllers/code"
+	"utilitor/initialisers"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -20,24 +21,12 @@ func routes(r *gin.Engine) {
 		c.Header("Access-Control-Allow-Origin", "*")
 	})
 
-	r.POST("/api/code", func(c *gin.Context) {
-		origin := c.Request.Header.Get("Origin")
-		// requestBody := c.Request.Body
-
-		code, hasCode := c.GetPostForm("code")
-
-		log.Println("code: ", code)
-		log.Println("hasCode: ", hasCode)
-
-		// c.JSON(200, gin.H{"ping": "pong"})
-
-		c.SetCookie("access_token", "test", 86400, "/", "/", true, true)
-		c.Redirect(http.StatusFound, origin+"/dashboard")
-	})
+	r.POST("/api/code", code.Controller)
 
 }
 
 func init() {
+	initialisers.LoadEnvVars()
 	// stdout and stderr are sent to AWS CloudWatch Logs
 	log.Printf("Gin cold start")
 	r := gin.Default()

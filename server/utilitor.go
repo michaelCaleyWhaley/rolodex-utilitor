@@ -30,6 +30,18 @@ func routes(r *gin.Engine) {
 		})
 	})
 
+	r.GET("/api/code", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
+	r.POST("/api/code", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
 }
 
 func init() {

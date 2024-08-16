@@ -12,34 +12,26 @@ import (
 )
 
 var ginLambda *ginadapter.GinLambda
+var isLocal = os.Args[len(os.Args)-1] == "--local"
 
 func routes(r *gin.Engine) {
 	r.Use(func(c *gin.Context) {
 		c.Header("Access-Control-Allow-Origin", "*")
 	})
 
-	r.GET("/api", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	r.GET("/api/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	r.GET("/api/code", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
 	r.POST("/api/code", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
+		// origin := c.Request.Header.Get("Origin")
+		// requestBody := c.Request.Body
+
+		code, hasCode := c.GetPostForm("code")
+
+		log.Println("code: ", code)
+		log.Println("hasCode: ", hasCode)
+
+		c.JSON(200, gin.H{"ping": "pong"})
+
+		// c.SetCookie("access_token", "test", 86400, "/", "/", true, true)
+		// c.Redirect(http.StatusFound, origin+"/dashboard")
 	})
 
 }
@@ -50,7 +42,6 @@ func init() {
 	r := gin.Default()
 	routes(r)
 
-	isLocal := os.Args[len(os.Args)-1] == "--local"
 	if isLocal {
 		r.Run("localhost:4000")
 		return
@@ -65,7 +56,6 @@ func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.API
 }
 
 func main() {
-	isLocal := os.Args[len(os.Args)-1] == "--local"
 	if isLocal {
 		return
 	}

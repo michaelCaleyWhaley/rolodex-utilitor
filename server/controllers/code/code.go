@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,27 +33,32 @@ func Controller(c *gin.Context) {
 	req.Header.Set("content-type", "application/x-www-form-urlencoded")
 	req.Header.Set("Authorization", "Basic "+os.Getenv("BASE_64_CLIENT_DETAILS"))
 	if err != nil {
-		fmt.Println("err", err)
+		errRedirect(c, origin, err)
+		return
 	}
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		errRedirect(c, origin, err)
+		return
 	}
 
 	defer resp.Body.Close()
 	if resp.Status != "200 OK" {
 		errRedirect(c, origin, err)
+		return
 	}
 
 	body, _ := io.ReadAll(resp.Body)
 	var tokenResp TokenResponse
 	if err := json.Unmarshal(body, &tokenResp); err != nil {
 		errRedirect(c, origin, err)
+		return
 	}
 
-	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", origin, true, true)
-	c.SetCookie("refresh_token", tokenResp.RefreshToken, 2628000, "/", origin, true, true)
+	domain := strings.Split(c.Request.Host, ":")[0]
+	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", domain, true, true)
+	c.SetCookie("refresh_token", tokenResp.RefreshToken, 2628000, "/", domain, true, true)
 	c.Redirect(http.StatusFound, origin+"/dashboard")
 }

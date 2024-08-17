@@ -19,8 +19,9 @@ type TokenResponse struct {
 	TokenType    string `json:"token_type"`
 }
 
-func errRedirect(c *gin.Context, origin string) {
-	c.Redirect(http.StatusNotFound, origin+"/404")
+func errRedirect(c *gin.Context, origin string, err error) {
+	fmt.Print("utilitor error:", err)
+	c.Redirect(http.StatusFound, origin+"/404")
 }
 
 func Controller(c *gin.Context) {
@@ -37,18 +38,18 @@ func Controller(c *gin.Context) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		errRedirect(c, origin)
+		errRedirect(c, origin, err)
 	}
 
 	defer resp.Body.Close()
 	if resp.Status != "200 OK" {
-		errRedirect(c, origin)
+		errRedirect(c, origin, err)
 	}
 
 	body, _ := io.ReadAll(resp.Body)
 	var tokenResp TokenResponse
 	if err := json.Unmarshal(body, &tokenResp); err != nil {
-		errRedirect(c, origin)
+		errRedirect(c, origin, err)
 	}
 
 	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", "/", true, true)

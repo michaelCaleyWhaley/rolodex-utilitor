@@ -52,7 +52,7 @@ func Controller(c *gin.Context) {
 		errRedirect(c, origin, err)
 	}
 
-	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", "/", true, true)
-	c.SetCookie("refresh_token", tokenResp.RefreshToken, 2628000, "/", "/", true, true)
+	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", origin, true, true)
+	c.SetCookie("refresh_token", tokenResp.RefreshToken, 2628000, "/", origin, true, true)
 	c.Redirect(http.StatusFound, origin+"/dashboard")
 }

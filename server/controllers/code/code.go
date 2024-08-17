@@ -46,14 +46,14 @@ func Controller(c *gin.Context) {
 
 	defer resp.Body.Close()
 	if resp.Status != "200 OK" {
-		errRedirect(c, origin, err, "Not 200")
+		errRedirect(c, origin, err, "Not 200.")
 		return
 	}
 
 	body, _ := io.ReadAll(resp.Body)
 	var tokenResp TokenResponse
 	if err := json.Unmarshal(body, &tokenResp); err != nil {
-		errRedirect(c, origin, err, "Unmarshall json")
+		errRedirect(c, origin, err, "Unmarshall json.")
 		return
 	}
 

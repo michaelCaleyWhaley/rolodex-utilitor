@@ -6,6 +6,7 @@ import (
 	"os"
 	"utilitor/controllers/code"
 	"utilitor/initialisers"
+	"utilitor/middleware"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -17,17 +18,18 @@ var ginLambda *ginadapter.GinLambda
 var isLocal = os.Args[len(os.Args)-1] == "--local"
 
 func routes(r *gin.Engine) {
-	r.Use(func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "*")
-	})
-
+	r.Use(middleware.CrossOrigin)
 	r.POST("/api/code", code.Controller)
 
+	// r.GET("/api/contact/list", middleware.VerifyAccessToken, func(c *gin.Context) {
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"test": "test",
+	// 	})
+	// })
 }
 
 func init() {
 	initialisers.LoadEnvVars()
-	// stdout and stderr are sent to AWS CloudWatch Logs
 	log.Printf("Gin cold start")
 	r := gin.Default()
 	routes(r)
@@ -41,7 +43,6 @@ func init() {
 }
 
 func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	// If no name is provided in the HTTP request body, throw an error
 	return ginLambda.ProxyWithContext(ctx, req)
 }
 

@@ -20,8 +20,8 @@ type TokenResponse struct {
 	TokenType    string `json:"token_type"`
 }
 
-func errRedirect(c *gin.Context, origin string, err error) {
-	fmt.Print("utilitor error:", err)
+func errRedirect(c *gin.Context, origin string, err error, message string) {
+	fmt.Print("utilitor error:", err, message)
 	c.Redirect(http.StatusFound, origin+"/404")
 }
 
@@ -33,27 +33,27 @@ func Controller(c *gin.Context) {
 	req.Header.Set("content-type", "application/x-www-form-urlencoded")
 	req.Header.Set("Authorization", "Basic "+os.Getenv("BASE_64_CLIENT_DETAILS"))
 	if err != nil {
-		errRedirect(c, origin, err)
+		errRedirect(c, origin, err, "Access token")
 		return
 	}
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		errRedirect(c, origin, err)
+		errRedirect(c, origin, err, "Do request.")
 		return
 	}
 
 	defer resp.Body.Close()
 	if resp.Status != "200 OK" {
-		errRedirect(c, origin, err)
+		errRedirect(c, origin, err, "Not 200")
 		return
 	}
 
 	body, _ := io.ReadAll(resp.Body)
 	var tokenResp TokenResponse
 	if err := json.Unmarshal(body, &tokenResp); err != nil {
-		errRedirect(c, origin, err)
+		errRedirect(c, origin, err, "Unmarshall json")
 		return
 	}
 

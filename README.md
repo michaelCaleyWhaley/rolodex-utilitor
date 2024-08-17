@@ -12,10 +12,10 @@ Inside this project you will find two folders at root, client and server.
 ## Infrastructure
 
 All infra for client and server is located at root in the platform_config folder.
- 
+
 s3 bucket name for infrastructure `rolodex-utilitor-terraform-state`.
 
-michael_caley@******.com
+michael_caley@**\*\***.com
 
 S3: http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
 API gateway: https://nh0hmn0bzk.execute-api.eu-west-2.amazonaws.com/deployed
@@ -30,8 +30,5 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 - server sets jwt in http only cookie
 
 https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin
-
-
-https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/oauth2/token?grant_type=authorization_code&code=91549b61-2b1b-4bb4-ad32-9e3bd56252dd&redirect_uri=http://localhost:3000/login
 
 https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html

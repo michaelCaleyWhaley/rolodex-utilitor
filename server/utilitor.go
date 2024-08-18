@@ -38,6 +38,8 @@ func routes(r *gin.Engine) {
 		domain := initialisers.GetConfig().CookieDomain
 		c.SetCookie("test1", "test", 86400, "/", domain, true, true)
 
+		c.SetCookie("test2", "test", 86400, "/", "/", true, true)
+
 		c.JSON(http.StatusOK, gin.H{
 			"test": "test",
 		})

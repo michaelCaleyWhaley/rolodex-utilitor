@@ -34,6 +34,7 @@ func RefreshToken(c *gin.Context, refreshToken string, origin string) (rfTokenRe
 	}
 
 	defer resp.Body.Close()
+
 	if resp.Status != "200 OK" {
 		return rfTokenResponse{}, errors.New("refresh token not 200")
 	}

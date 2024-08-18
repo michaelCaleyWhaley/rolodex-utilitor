@@ -6,8 +6,10 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
+	"utilitor/initialisers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,7 +23,9 @@ type auTokenResponse struct {
 }
 
 func PostAuthCode(c *gin.Context, code string, origin string) (auTokenResponse, error) {
-	req, nrErr := http.NewRequest("POST", fmt.Sprintf("https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/oauth2/token?grant_type=authorization_code&code=%s&redirect_uri=http://localhost:3000/login", code), bytes.NewBuffer([]byte{}))
+	returnUrl := initialisers.GetConfig().ReturnUrl
+
+	req, nrErr := http.NewRequest("POST", fmt.Sprintf("https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/oauth2/token?grant_type=authorization_code&code=%s&redirect_uri=%s", code, returnUrl), bytes.NewBuffer([]byte{}))
 	req.Header.Set("content-type", "application/x-www-form-urlencoded")
 	req.Header.Set("Authorization", "Basic "+os.Getenv("BASE_64_CLIENT_DETAILS"))
 	if nrErr != nil {
@@ -35,6 +39,8 @@ func PostAuthCode(c *gin.Context, code string, origin string) (auTokenResponse, 
 	}
 
 	defer resp.Body.Close()
+	log.Println("resp: ", resp)
+
 	if resp.Status != "200 OK" {
 		return auTokenResponse{}, errors.New("auth code not 200")
 	}

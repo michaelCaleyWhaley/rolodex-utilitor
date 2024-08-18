@@ -39,7 +39,7 @@ func routes(r *gin.Engine) {
 		c.SetCookie("test1", "test", 86400, "/", domain, true, true)
 
 		c.JSON(http.StatusOK, gin.H{
-			"test": "test",
+			"cookies": []string{"cookie1", "cookie2"},
 		})
 	})
 }

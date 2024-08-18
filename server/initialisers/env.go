@@ -9,7 +9,8 @@ import (
 )
 
 type config struct {
-	ReturnUrl string
+	CookieDomain string
+	ReturnUrl    string
 }
 
 type appConfig struct {
@@ -19,10 +20,12 @@ type appConfig struct {
 
 var setAppConfig = appConfig{
 	local: config{
-		ReturnUrl: "http://localhost:3000/login",
+		CookieDomain: "localhost",
+		ReturnUrl:    "http://localhost:3000/login",
 	},
 	prod: config{
-		ReturnUrl: "https://d12si818kne643.cloudfront.net/login",
+		CookieDomain: "d12si818kne643.cloudfront.net",
+		ReturnUrl:    "https://d12si818kne643.cloudfront.net/login",
 	},
 }
 

@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"net/http"
-	"strings"
+	"utilitor/initialisers"
 	cogHelpers "utilitor/services/cog"
 	servicesGin "utilitor/services/gin"
 
@@ -38,7 +38,7 @@ func VerifyAccessToken(c *gin.Context) {
 
 	userRetryResp, userRetryErr := cogHelpers.UserInfo(c, refreshResp.AccessToken, origin)
 	if userRetryErr == nil {
-		domain := strings.Split(c.Request.Host, ":")[0]
+		domain := initialisers.GetConfig().CookieDomain
 		c.SetCookie("ru_access_token", refreshResp.AccessToken, 86400, "/", domain, true, true)
 		c.Set("User", userRetryResp)
 		return

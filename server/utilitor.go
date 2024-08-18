@@ -22,7 +22,6 @@ func routes(r *gin.Engine) {
 	})
 
 	r.POST("/api/code", code.Controller)
-
 }
 
 func init() {

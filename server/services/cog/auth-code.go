@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"utilitor/initialisers"
@@ -39,8 +38,6 @@ func PostAuthCode(c *gin.Context, code string, origin string) (auTokenResponse, 
 	}
 
 	defer resp.Body.Close()
-	log.Println("resp: ", resp)
-
 	if resp.Status != "200 OK" {
 		return auTokenResponse{}, errors.New("auth code not 200")
 	}

@@ -3,6 +3,7 @@ package contacts
 import (
 	"log"
 	"net/http"
+	"utilitor/initialisers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,6 +38,9 @@ func Controller(c *gin.Context) {
 	VerifiedUser, hasUser := c.Get("User")
 	log.Println("hasUser: ", hasUser)
 	log.Println("VerifiedUser: ", VerifiedUser)
+
+	domain := initialisers.GetConfig().CookieDomain
+	c.SetCookie("ru_test", "test", 86400, "/", domain, true, true)
 
 	c.JSON(http.StatusOK, gin.H{
 		"contacts": contacts,

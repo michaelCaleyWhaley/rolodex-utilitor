@@ -1,7 +1,6 @@
 package code
 
 import (
-	"log"
 	"net/http"
 	"utilitor/initialisers"
 	awsHelpers "utilitor/services/cog"
@@ -21,9 +20,7 @@ func Controller(c *gin.Context) {
 	}
 
 	domain := initialisers.GetConfig().CookieDomain
-	log.Println("domain: ", domain)
-
-	c.SetCookie("ru_access_token", tokenResp.AccessToken, 86400, "/", domain, true, true)
-	c.SetCookie("ru_refresh_token", tokenResp.RefreshToken, 2628000, "/", domain, true, true)
+	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", domain, true, true)
+	c.SetCookie("refresh_token", tokenResp.RefreshToken, 2628000, "/", domain, true, true)
 	c.Redirect(http.StatusFound, origin+"/dashboard")
 }

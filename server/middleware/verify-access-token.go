@@ -12,7 +12,7 @@ import (
 func VerifyAccessToken(c *gin.Context) {
 	origin := c.Request.Header.Get("Origin")
 
-	accessToken, atCookieErr := c.Request.Cookie("ru_access_token")
+	accessToken, atCookieErr := c.Request.Cookie("access_token")
 	if atCookieErr != nil {
 		servicesGin.ErrRedirect(c, origin, atCookieErr, "no access_token cookie")
 		return
@@ -24,7 +24,7 @@ func VerifyAccessToken(c *gin.Context) {
 		return
 	}
 
-	refreshToken, rtCookieErr := c.Request.Cookie("ru_refresh_token")
+	refreshToken, rtCookieErr := c.Request.Cookie("refresh_token")
 	if rtCookieErr != nil {
 		servicesGin.ErrRedirect(c, origin, atCookieErr, "no refresh_token cookie")
 		return
@@ -39,7 +39,7 @@ func VerifyAccessToken(c *gin.Context) {
 	userRetryResp, userRetryErr := cogHelpers.UserInfo(c, refreshResp.AccessToken, origin)
 	if userRetryErr == nil {
 		domain := initialisers.GetConfig().CookieDomain
-		c.SetCookie("ru_access_token", refreshResp.AccessToken, 86400, "/", domain, true, true)
+		c.SetCookie("access_token", refreshResp.AccessToken, 86400, "/", domain, true, true)
 		c.Set("User", userRetryResp)
 		return
 	} else {

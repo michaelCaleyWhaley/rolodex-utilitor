@@ -2,7 +2,7 @@ package code
 
 import (
 	"net/http"
-	"strings"
+	"utilitor/initialisers"
 	awsHelpers "utilitor/services/cog"
 	servicesGin "utilitor/services/gin"
 
@@ -19,7 +19,7 @@ func Controller(c *gin.Context) {
 		return
 	}
 
-	domain := strings.Split(c.Request.Host, ":")[0]
+	domain := initialisers.GetConfig().CookieDomain
 	c.SetCookie("ru_access_token", tokenResp.AccessToken, 86400, "/", domain, true, true)
 	c.SetCookie("ru_refresh_token", tokenResp.RefreshToken, 2628000, "/", domain, true, true)
 	c.Redirect(http.StatusFound, origin+"/dashboard")

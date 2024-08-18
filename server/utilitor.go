@@ -32,6 +32,9 @@ func routes(r *gin.Engine) {
 		host := c.Request.Header.Get("Host")
 		log.Println("host: ", host)
 
+		reqHost := c.Request.Host
+		log.Println("reqHost: ", reqHost)
+
 		domain := initialisers.GetConfig().CookieDomain
 		c.SetCookie("test1", "test", 86400, "/", domain, true, true)
 

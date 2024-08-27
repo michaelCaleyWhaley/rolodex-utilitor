@@ -65,7 +65,11 @@ resource "aws_lambda_function" "rolodex_utilitor_function" {
   # Workaround to avoid needing to set filename in this repo
   filename = "../server.zip"
   lifecycle {
-    ignore_changes = [filename]
+    ignore_changes = [
+      filename,
+      environment.0.variables["CLIENT_ID"],
+      environment.0.variables["CLIENT_SECRET"],
+    ]
   }
 
   environment {
@@ -73,4 +77,6 @@ resource "aws_lambda_function" "rolodex_utilitor_function" {
       "GIN_MODE" = "release"
     }
   }
+
+
 }

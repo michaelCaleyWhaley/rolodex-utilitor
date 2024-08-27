@@ -23,11 +23,9 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- use code to get access token and set access token in cookie
-- when access token goes stale use refresh token to fetch new access token
-- use access token to fetch user details
-- create jwt with secure user details in
-- server sets jwt in http only cookie
+- backwards engineer the terraform to forward cookie through cloudfront [stack](https://stackoverflow.com/questions/62504696/amazon-api-gateway-ignores-set-cookie)
+- adjust cookies to handle single cookie or find solution
+- set cookie from lambda
 
 https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin
 

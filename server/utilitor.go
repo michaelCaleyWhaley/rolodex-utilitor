@@ -41,12 +41,12 @@ func routes(r *gin.Engine) {
 
 		// c.BindHeader()
 
-		c.Header("Set-Cookie", "coookietest1=test3")
-		c.Header("SEt-Cookie", "coookietest2=test4")
-		c.Set("cookies", "here=1")
+		// c.Header("Set-Cookie", "coookietest1=test3")
+		// c.Header("SEt-Cookie", "coookietest2=test4")
+		// c.Set("cookies", "here=1")
 
 		c.JSON(http.StatusOK, gin.H{
-			// "cookies": []string{"cookie1", "cookie2"},
+			"cookies": []string{"cookie1=1", "cookie2=2"},
 		})
 	})
 }

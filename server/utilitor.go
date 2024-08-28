@@ -35,14 +35,14 @@ func routes(r *gin.Engine) {
 		reqHost := c.Request.Host
 		log.Println("reqHost: ", reqHost)
 
-		domain := initialisers.GetConfig().CookieDomain
-		c.SetCookie("test1", "test", 86400, "/", domain, true, true)
-		c.SetCookie("test2", "test", 86400, "/", domain, true, true)
+		// domain := initialisers.GetConfig().CookieDomain
+		// c.SetCookie("test1", "test", 86400, "/", domain, true, true)
+		// c.SetCookie("test2", "test", 86400, "/", domain, true, true)
 
 		// c.BindHeader()
 
 		c.Header("Set-Cookie", "coookietest1=test3")
-		c.Header("Set-Cookie", "coookietest2=test4")
+		c.Header("SEt-Cookie", "coookietest2=test4")
 		// c.Set()
 
 		c.JSON(http.StatusOK, gin.H{

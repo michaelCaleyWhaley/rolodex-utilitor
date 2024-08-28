@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"net/http"
 	"os"
 	"utilitor/controllers/code"
 	"utilitor/controllers/contacts"
@@ -24,31 +23,19 @@ func routes(r *gin.Engine) {
 	r.POST("/api/code", code.Controller)
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)
 
-	r.GET("/api/test", func(c *gin.Context) {
+	// r.GET("/api/test", func(c *gin.Context) {
+	// 	// origin := c.Request.Header.Get("Origin")
+	// 	// host := c.Request.Header.Get("Host")
+	// 	// reqHost := c.Request.Host
 
-		origin := c.Request.Header.Get("Origin")
-		log.Println("origin: ", origin)
+	// 	domain := initialisers.GetConfig().CookieDomain
+	// 	c.SetCookie("test1", "test", 86400, "/", domain, true, true)
+	// 	c.SetCookie("test2", "test", 86400, "/", domain, true, true)
 
-		host := c.Request.Header.Get("Host")
-		log.Println("host: ", host)
-
-		reqHost := c.Request.Host
-		log.Println("reqHost: ", reqHost)
-
-		// domain := initialisers.GetConfig().CookieDomain
-		// c.SetCookie("test1", "test", 86400, "/", domain, true, true)
-		// c.SetCookie("test2", "test", 86400, "/", domain, true, true)
-
-		// c.BindHeader()
-
-		// c.Header("Set-Cookie", "coookietest1=test3")
-		// c.Header("SEt-Cookie", "coookietest2=test4")
-		// c.Set("cookies", "here=1")
-
-		c.JSON(http.StatusOK, gin.H{
-			"cookies": []string{"cookie1=1", "cookie2=2"},
-		})
-	})
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"cookies": []string{"cookie1", "cookie2"},
+	// 	})
+	// })
 }
 
 func init() {
@@ -65,12 +52,7 @@ func init() {
 }
 
 func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-
-	proxyResponse, proxyError := ginLambda.ProxyWithContext(ctx, req)
-
-	proxyResponse.MultiValueHeaders = map[string][]string{"Set-Cookie": {"avenger1=1", "avenger2=2"}}
-
-	return proxyResponse, proxyError
+	return ginLambda.ProxyWithContext(ctx, req)
 }
 
 func main() {

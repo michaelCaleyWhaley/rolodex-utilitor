@@ -23,7 +23,6 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- backwards engineer the terraform to forward cookie through cloudfront [stack](https://stackoverflow.com/questions/62504696/amazon-api-gateway-ignores-set-cookie)
 - adjust cookies to handle single cookie or find solution
 - set cookie from lambda
 

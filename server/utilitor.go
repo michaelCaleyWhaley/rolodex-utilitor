@@ -68,7 +68,7 @@ func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.API
 
 	proxyResponse, proxyError := ginLambda.ProxyWithContext(ctx, req)
 
-	proxyResponse.MultiValueHeaders = map[string][]string{"Set-Cookie": {"avenger1", "avenger2"}}
+	proxyResponse.MultiValueHeaders = map[string][]string{"Set-Cookie": {"avenger1=1", "avenger2=2"}}
 
 	return proxyResponse, proxyError
 }

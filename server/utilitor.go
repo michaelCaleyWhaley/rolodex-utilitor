@@ -65,7 +65,12 @@ func init() {
 }
 
 func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return ginLambda.ProxyWithContext(ctx, req)
+
+	proxyResponse, proxyError := ginLambda.ProxyWithContext(ctx, req)
+
+	proxyResponse.MultiValueHeaders = map[string][]string{"Set-Cookie": {"avenger1", "avenger2"}}
+
+	return proxyResponse, proxyError
 }
 
 func main() {

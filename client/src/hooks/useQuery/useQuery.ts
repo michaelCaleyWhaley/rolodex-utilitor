@@ -7,6 +7,7 @@ function useQuery<State, SetState extends Function>(
   storageKey: string
 ) {
   useEffect(() => {
+    if (state) return;
     const lsState = window.localStorage.getItem(storageKey);
     if (lsState) {
       setState(JSON.parse(lsState));
@@ -14,7 +15,6 @@ function useQuery<State, SetState extends Function>(
     }
 
     (async () => {
-      if (state) return;
       const response = await fetch(endpoint).catch(() => null);
 
       if (!response || response.status !== 200) {

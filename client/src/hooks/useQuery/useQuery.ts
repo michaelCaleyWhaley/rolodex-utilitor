@@ -7,19 +7,26 @@ function useQuery<State, SetState extends Function>(
   storageKey: string
 ) {
   useEffect(() => {
-    (async () => {
-      if (state) return;
-      const response = await fetch(endpoint).catch(() => {
-        window.location.href = "/login";
-        return null;
-      });
+    if (state) return;
+    const lsState = window.localStorage.getItem(storageKey);
+    if (lsState) {
+      setState(JSON.parse(lsState));
+      return;
+    }
 
-      if (!response) return;
+    (async () => {
+      const response = await fetch(endpoint).catch(() => null);
+
+      if (!response || response.status !== 200) {
+        window.location.href = "/";
+        return;
+      }
+
       const json = await response.json();
       const resContacts = json?.contacts;
 
       if (resContacts) {
-        window.localStorage.set(storageKey, resContacts);
+        window.localStorage.setItem(storageKey, JSON.stringify(resContacts));
         setState(resContacts);
       }
     })();

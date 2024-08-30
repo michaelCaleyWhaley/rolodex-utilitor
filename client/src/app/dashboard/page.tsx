@@ -7,7 +7,7 @@ type Contact = { FirstName: string };
 
 export default function Dashboard() {
   const [contacts, setContacts] = useState<Contact[] | null>(null);
-  useQuery(contacts, setContacts, "/api/contact/list");
+  useQuery(contacts, setContacts, "/api/contact/list", "contacts");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

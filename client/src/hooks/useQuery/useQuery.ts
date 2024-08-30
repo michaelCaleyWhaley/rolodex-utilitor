@@ -3,7 +3,8 @@ import { useEffect } from "react";
 function useQuery<State, SetState extends Function>(
   state: State,
   setState: SetState,
-  endpoint: string
+  endpoint: string,
+  storageKey: string
 ) {
   useEffect(() => {
     (async () => {
@@ -18,6 +19,7 @@ function useQuery<State, SetState extends Function>(
       const resContacts = json?.contacts;
 
       if (resContacts) {
+        window.localStorage.set(storageKey, resContacts);
         setState(resContacts);
       }
     })();

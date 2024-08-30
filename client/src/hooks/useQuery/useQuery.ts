@@ -13,6 +13,7 @@ function useQuery<State, SetState extends Function>(
         window.location.href = "/login";
         return null;
       });
+      console.log("response: ", response);
 
       if (!response) return;
       const json = await response.json();

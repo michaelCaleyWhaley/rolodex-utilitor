@@ -28,7 +28,7 @@ export default function Dashboard() {
           contacts.map(({ FirstName }) => {
             // console.log("contact: ", contact);
 
-            return <li>{FirstName}</li>;
+            return <li key={`firstname=${FirstName}`}>{FirstName}</li>;
           })}
       </ul>
     </main>

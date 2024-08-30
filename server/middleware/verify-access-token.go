@@ -1,7 +1,10 @@
 package middleware
 
 import (
+	"log"
 	"net/http"
+	"strings"
+	"utilitor/constants"
 	"utilitor/initialisers"
 	cogHelpers "utilitor/services/cog"
 	servicesGin "utilitor/services/gin"
@@ -10,27 +13,28 @@ import (
 )
 
 func VerifyAccessToken(c *gin.Context) {
+	log.Println("LOG: ")
+
 	origin := c.Request.Header.Get("Origin")
 
-	accessToken, atCookieErr := c.Request.Cookie("access_token")
-	if atCookieErr != nil {
-		servicesGin.ErrRedirect(c, origin, atCookieErr, "no access_token cookie")
+	authCookie, atCookieErr := c.Request.Cookie(constants.AUTH)
+
+	authSlice := strings.Split(authCookie.Value, constants.COOKIE_SEPERATOR)
+
+	if atCookieErr != nil && len(authSlice) == 2 {
+		servicesGin.ErrRedirect(c, origin, atCookieErr, "no auth cookie")
 		return
 	}
 
-	userResp, userErr := cogHelpers.UserInfo(c, accessToken.Value, origin)
+	accessToken := authSlice[0]
+	userResp, userErr := cogHelpers.UserInfo(c, accessToken, origin)
 	if userErr == nil {
 		c.Set("User", userResp)
 		return
 	}
 
-	refreshToken, rtCookieErr := c.Request.Cookie("refresh_token")
-	if rtCookieErr != nil {
-		servicesGin.ErrRedirect(c, origin, atCookieErr, "no refresh_token cookie")
-		return
-	}
-
-	refreshResp, rtErr := cogHelpers.RefreshToken(c, refreshToken.Value, origin)
+	refreshToken := authSlice[1]
+	refreshResp, rtErr := cogHelpers.RefreshToken(c, refreshToken, origin)
 	if rtErr != nil {
 		servicesGin.ErrRedirect(c, origin, rtErr, "Post auth code.")
 		return
@@ -39,7 +43,7 @@ func VerifyAccessToken(c *gin.Context) {
 	userRetryResp, userRetryErr := cogHelpers.UserInfo(c, refreshResp.AccessToken, origin)
 	if userRetryErr == nil {
 		domain := initialisers.GetConfig().CookieDomain
-		c.SetCookie("access_token", refreshResp.AccessToken, 86400, "/", domain, true, true)
+		c.SetCookie(constants.AUTH, refreshResp.AccessToken+constants.COOKIE_SEPERATOR+refreshToken, 2628000, "/", domain, true, true)
 		c.Set("User", userRetryResp)
 		return
 	} else {

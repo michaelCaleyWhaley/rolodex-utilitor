@@ -1,7 +1,6 @@
 package contacts
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,6 +17,7 @@ type Contact struct {
 	FirstName string
 	LastName  string
 	Address   Address
+	Email     string
 }
 
 var contacts = []Contact{
@@ -25,20 +25,26 @@ var contacts = []Contact{
 		FirstName: "Michael",
 		LastName:  "Caley",
 		Address: Address{
-			Line1:    "53 Burton Road",
-			Line2:    "Cottingham",
+			Line1:    "53 Speed Way",
+			Line2:    "Shed Life",
 			Line3:    "",
-			PostCode: "HU16 5DZ",
+			PostCode: "SHED L1F3",
 		},
+		Email: "Kneedeepwater@hotmail.com",
 	},
 }
 
 func Controller(c *gin.Context) {
-	VerifiedUser, hasUser := c.Get("User")
-	log.Println("hasUser: ", hasUser)
-	log.Println("VerifiedUser: ", VerifiedUser)
+	user, hasUser := c.Get("User")
+	if !hasUser {
+		c.JSON(http.StatusForbidden, gin.H{
+			"message": "User not found.",
+		})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"contacts": contacts,
+		"contacts":     contacts,
+		"VerifiedUser": user,
 	})
 }

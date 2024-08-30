@@ -9,13 +9,13 @@ function useQuery<State, SetState extends Function>(
   useEffect(() => {
     (async () => {
       if (state) return;
-      const response = await fetch(endpoint).catch(() => {
-        window.location.href = "/login";
-        return null;
-      });
-      console.log("response: ", response);
+      const response = await fetch(endpoint).catch(() => null);
 
-      if (!response) return;
+      if (!response || response.status !== 200) {
+        window.location.href = "/login";
+        return;
+      }
+
       const json = await response.json();
       const resContacts = json?.contacts;
 

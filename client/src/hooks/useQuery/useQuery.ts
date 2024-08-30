@@ -12,7 +12,7 @@ function useQuery<State, SetState extends Function>(
       const response = await fetch(endpoint).catch(() => null);
 
       if (!response || response.status !== 200) {
-        window.location.href = "/login";
+        window.location.href = "/";
         return;
       }
 

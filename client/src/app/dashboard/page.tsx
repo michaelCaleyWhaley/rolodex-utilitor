@@ -3,8 +3,10 @@
 import { apiUrl } from "@/config/urls";
 import { useEffect, useRef, useState } from "react";
 
+type Contact = { FirstName: string };
+
 export default function Dashboard() {
-  const [contacts, setContacts] = useState(null);
+  const [contacts, setContacts] = useState<Contact[] | null>(null);
 
   useEffect(() => {
     (async () => {

@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"log"
-	"net/http"
 	"os"
 	"utilitor/controllers/code"
 	"utilitor/controllers/contacts"
@@ -23,27 +22,6 @@ func routes(r *gin.Engine) {
 	r.Use(middleware.CrossOrigin)
 	r.POST("/api/code", code.Controller)
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)
-
-	r.GET("/api/test", func(c *gin.Context) {
-
-		origin := c.Request.Header.Get("Origin")
-		log.Println("origin: ", origin)
-
-		host := c.Request.Header.Get("Host")
-		log.Println("host: ", host)
-
-		reqHost := c.Request.Host
-		log.Println("reqHost: ", reqHost)
-
-		domain := initialisers.GetConfig().CookieDomain
-		c.SetCookie("test1", "test", 86400, "/", domain, true, true)
-
-		// c.Set()
-
-		c.JSON(http.StatusOK, gin.H{
-			"cookies": []string{"cookie1", "cookie2"},
-		})
-	})
 }
 
 func init() {
@@ -69,31 +47,3 @@ func main() {
 	}
 	lambda.Start(Handler)
 }
-
-// #####################################
-// Simple working example
-// #####################################
-
-// package main
-
-// import (
-// 	"context"
-// 	"encoding/json"
-// 	"fmt"
-
-// 	"github.com/aws/aws-lambda-go/events"
-// 	"github.com/aws/aws-lambda-go/lambda"
-// )
-
-// func HandleRequest(ctx context.Context, event events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-
-// 	data := map[string]string{"test": "test string"}
-// 	responseJSON, err := json.Marshal(data)
-// 	fmt.Println(err)
-
-// 	return events.APIGatewayProxyResponse{Body: string(responseJSON), StatusCode: 200}, nil
-// }
-
-// func main() {
-// 	lambda.Start(HandleRequest)
-// }

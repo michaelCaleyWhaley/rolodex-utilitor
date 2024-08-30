@@ -79,7 +79,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       "POST",
       "PUT",
     ]
-    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    cache_policy_id          = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.rolodex_origin_request_policy.id
     cached_methods = [
       "GET",
       "HEAD",
@@ -88,14 +89,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     target_origin_id       = local.api_origin_id
     viewer_protocol_policy = "redirect-to-https"
 
-    # forwarded_values {
-    #   query_string = true
-    #   headers      = ["*"]
-
-    #   cookies {
-    #     forward = "all"
-    #   }
-    # }
   }
 
   ordered_cache_behavior {
@@ -108,7 +101,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       "POST",
       "PUT",
     ]
-    cache_policy_id = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    cache_policy_id          = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.rolodex_origin_request_policy.id
     cached_methods = [
       "GET",
       "HEAD",
@@ -127,4 +121,18 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
+}
+
+resource "aws_cloudfront_origin_request_policy" "rolodex_origin_request_policy" {
+  name = "rolodex-forward-cookies"
+
+  cookies_config {
+    cookie_behavior = "all"
+  }
+  headers_config {
+    header_behavior = "none"
+  }
+  query_strings_config {
+    query_string_behavior = "none"
+  }
 }

@@ -2,6 +2,7 @@ package code
 
 import (
 	"net/http"
+	"utilitor/constants"
 	"utilitor/initialisers"
 	awsHelpers "utilitor/services/cog"
 	servicesGin "utilitor/services/gin"
@@ -18,9 +19,7 @@ func Controller(c *gin.Context) {
 		servicesGin.ErrRedirect(c, origin, err, "Post auth code.")
 		return
 	}
-
 	domain := initialisers.GetConfig().CookieDomain
-	c.SetCookie("access_token", tokenResp.AccessToken, 86400, "/", domain, true, true)
-	c.SetCookie("refresh_token", tokenResp.RefreshToken, 2628000, "/", domain, true, true)
+	c.SetCookie(constants.AUTH, tokenResp.AccessToken+constants.COOKIE_SEPERATOR+tokenResp.RefreshToken, 2628000, "/", domain, true, true)
 	c.Redirect(http.StatusFound, origin+"/dashboard")
 }

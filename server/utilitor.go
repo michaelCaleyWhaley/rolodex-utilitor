@@ -22,20 +22,6 @@ func routes(r *gin.Engine) {
 	r.Use(middleware.CrossOrigin)
 	r.POST("/api/code", code.Controller)
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)
-
-	// r.GET("/api/test", func(c *gin.Context) {
-	// 	// origin := c.Request.Header.Get("Origin")
-	// 	// host := c.Request.Header.Get("Host")
-	// 	// reqHost := c.Request.Host
-
-	// 	domain := initialisers.GetConfig().CookieDomain
-	// 	c.SetCookie("test1", "test", 86400, "/", domain, true, true)
-	// 	c.SetCookie("test2", "test", 86400, "/", domain, true, true)
-
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"cookies": []string{"cookie1", "cookie2"},
-	// 	})
-	// })
 }
 
 func init() {

@@ -9,7 +9,7 @@ function useQuery<State, SetState extends Function>(
   useEffect(() => {
     const lsState = window.localStorage.getItem(storageKey);
     if (lsState) {
-      setState(lsState);
+      setState(JSON.parse(lsState));
       return;
     }
 
@@ -26,7 +26,7 @@ function useQuery<State, SetState extends Function>(
       const resContacts = json?.contacts;
 
       if (resContacts) {
-        window.localStorage.setItem(storageKey, resContacts);
+        window.localStorage.setItem(storageKey, JSON.stringify(resContacts));
         setState(resContacts);
       }
     })();

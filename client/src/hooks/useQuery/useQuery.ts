@@ -7,6 +7,12 @@ function useQuery<State, SetState extends Function>(
   storageKey: string
 ) {
   useEffect(() => {
+    const lsState = window.localStorage.getItem(storageKey);
+    if (lsState) {
+      setState(lsState);
+      return;
+    }
+
     (async () => {
       if (state) return;
       const response = await fetch(endpoint).catch(() => null);
@@ -20,7 +26,7 @@ function useQuery<State, SetState extends Function>(
       const resContacts = json?.contacts;
 
       if (resContacts) {
-        window.localStorage.set(storageKey, resContacts);
+        window.localStorage.setItem(storageKey, resContacts);
         setState(resContacts);
       }
     })();

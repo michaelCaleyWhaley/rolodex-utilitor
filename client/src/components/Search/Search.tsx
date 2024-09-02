@@ -28,8 +28,10 @@ function Search({ contacts }: PropTypes) {
       <ul>
         {alphabet &&
           alphabet.map((letter) => (
-            <li className={style["search__letter"]} key={`alpha${letter}`}>
-              {letter}
+            <li key={`alpha${letter}`}>
+              <a className={style["search__letter"]} href={`#${letter}`}>
+                {letter}
+              </a>
             </li>
           ))}
       </ul>

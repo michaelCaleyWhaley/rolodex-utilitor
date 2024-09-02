@@ -1,6 +1,23 @@
-import { Contact } from "@/app/dashboard/page";
+import { Contact, ContactAddress } from "@/app/dashboard/page";
 
 import style from "./Contact-Card.module.scss";
+
+function AddressLink({
+  Address,
+  text,
+}: {
+  Address: ContactAddress;
+  text: string;
+}) {
+  return (
+    <a
+      href={`https://www.google.com/maps/search/?api=1&query=${Address.Line1}+${Address.Line2}+${Address.Line3}+${Address.PostCode}`}
+      target="_blank"
+    >
+      {text}
+    </a>
+  );
+}
 
 function ContactCard({
   FirstName,
@@ -9,6 +26,8 @@ function ContactCard({
   Address,
   Email,
   PhoneNo,
+  ServiceStart,
+  ServiceFreq,
 }: Contact) {
   return (
     <ul className={style["card"]}>
@@ -17,10 +36,18 @@ function ContactCard({
       </li>
       <li className={style["company"]}>{Company}</li>
 
-      <li>{Address.Line1}</li>
-      <li>{Address.Line2}</li>
-      <li>{Address.Line3}</li>
-      <li className={style["postcode"]}>{Address.PostCode}</li>
+      <li>
+        <AddressLink Address={Address} text={Address.Line1} />
+      </li>
+      <li>
+        <AddressLink Address={Address} text={Address.Line2} />
+      </li>
+      <li>
+        <AddressLink Address={Address} text={Address.Line3} />
+      </li>
+      <li className={style["postcode"]}>
+        <AddressLink Address={Address} text={Address.PostCode} />
+      </li>
       <li>
         <svg
           data-id="20"
@@ -58,6 +85,8 @@ function ContactCard({
         </svg>
         {PhoneNo}
       </li>
+      <li>{ServiceStart}</li>
+      <li>{ServiceFreq}</li>
     </ul>
   );
 }

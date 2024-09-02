@@ -23,6 +23,7 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
+- alphabetical titles
 - sort by service date
 - add a contact
 - update a contact
@@ -31,3 +32,7 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin
 
 https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html
+
+## Design
+
+- https://v0.dev/

@@ -14,12 +14,14 @@ type Address struct {
 }
 
 type Contact struct {
-	FirstName string
-	LastName  string
-	Company   string
-	Address   Address
-	Email     string
-	PhoneNo   string
+	FirstName    string
+	LastName     string
+	Company      string
+	Address      Address
+	Email        string
+	PhoneNo      string
+	ServiceStart string
+	ServiceFreq  int64
 }
 
 var contacts = []Contact{
@@ -28,74 +30,30 @@ var contacts = []Contact{
 		LastName:  "Caley",
 		Company:   "Globo ltd",
 		Address: Address{
-			Line1:    "53 Speed Way",
-			Line2:    "Shed Life",
+			Line1:    "10 Burton Road",
+			Line2:    "Cottingham",
 			Line3:    "",
-			PostCode: "SHED L1F3",
+			PostCode: "HU16 5DZ",
 		},
-		Email:   "Kneedeepwater@hotmail.com",
-		PhoneNo: "0775349612",
-	}, {
-		FirstName: "Michael",
-		LastName:  "Caley",
-		Company:   "Globo ltd",
-		Address: Address{
-			Line1:    "53 Speed Way",
-			Line2:    "Shed Life",
-			Line3:    "",
-			PostCode: "SHED L1F3",
-		},
-		Email:   "Kneedeepwater@hotmail.com",
-		PhoneNo: "0775349612",
-	}, {
-		FirstName: "Michael",
-		LastName:  "Caley",
-		Company:   "Globo ltd",
-		Address: Address{
-			Line1:    "53 Speed Way",
-			Line2:    "Shed Life",
-			Line3:    "",
-			PostCode: "SHED L1F3",
-		},
-		Email:   "Kneedeepwater@hotmail.com",
-		PhoneNo: "0775349612",
-	}, {
-		FirstName: "Michael",
-		LastName:  "Caley",
-		Company:   "Globo ltd",
-		Address: Address{
-			Line1:    "53 Speed Way",
-			Line2:    "Shed Life",
-			Line3:    "",
-			PostCode: "SHED L1F3",
-		},
-		Email:   "Kneedeepwater@hotmail.com",
-		PhoneNo: "0775349612",
-	}, {
-		FirstName: "Michael",
-		LastName:  "Caley",
-		Company:   "Globo ltd",
-		Address: Address{
-			Line1:    "53 Speed Way",
-			Line2:    "Shed Life",
-			Line3:    "",
-			PostCode: "SHED L1F3",
-		},
-		Email:   "Kneedeepwater@hotmail.com",
-		PhoneNo: "0775349612",
+		Email:        "Kneedeepwater@hotmail.com",
+		PhoneNo:      "0775349612",
+		ServiceStart: "2017-06-01",
+		ServiceFreq:  6,
 	},
 	{
 		FirstName: "Sophie",
-		LastName:  "Tan",
+		LastName:  "Aaley",
 		Company:   "Globo ltd",
 		Address: Address{
-			Line1:    "53 Speed Way",
-			Line2:    "Shed Life",
+			Line1:    "10 Burton Road",
+			Line2:    "Cottingham",
 			Line3:    "",
-			PostCode: "SHED L1F3",
+			PostCode: "HU16 5DZ",
 		},
-		Email:   "Shee@hotmail.com",
-		PhoneNo: "0775349612",
+		Email:        "Kneedeepwater@hotmail.com",
+		PhoneNo:      "0775349612",
+		ServiceStart: "2017-06-01",
+		ServiceFreq:  6,
 	},
 }
 

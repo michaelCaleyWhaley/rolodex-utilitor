@@ -23,7 +23,7 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- sort by service
+- sort by service date
 - add a contact
 - update a contact
 - delete a contact

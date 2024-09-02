@@ -16,21 +16,86 @@ type Address struct {
 type Contact struct {
 	FirstName string
 	LastName  string
+	Company   string
 	Address   Address
 	Email     string
+	PhoneNo   string
 }
 
 var contacts = []Contact{
 	{
 		FirstName: "Michael",
 		LastName:  "Caley",
+		Company:   "Globo ltd",
 		Address: Address{
 			Line1:    "53 Speed Way",
 			Line2:    "Shed Life",
 			Line3:    "",
 			PostCode: "SHED L1F3",
 		},
-		Email: "Kneedeepwater@hotmail.com",
+		Email:   "Kneedeepwater@hotmail.com",
+		PhoneNo: "0775349612",
+	}, {
+		FirstName: "Michael",
+		LastName:  "Caley",
+		Company:   "Globo ltd",
+		Address: Address{
+			Line1:    "53 Speed Way",
+			Line2:    "Shed Life",
+			Line3:    "",
+			PostCode: "SHED L1F3",
+		},
+		Email:   "Kneedeepwater@hotmail.com",
+		PhoneNo: "0775349612",
+	}, {
+		FirstName: "Michael",
+		LastName:  "Caley",
+		Company:   "Globo ltd",
+		Address: Address{
+			Line1:    "53 Speed Way",
+			Line2:    "Shed Life",
+			Line3:    "",
+			PostCode: "SHED L1F3",
+		},
+		Email:   "Kneedeepwater@hotmail.com",
+		PhoneNo: "0775349612",
+	}, {
+		FirstName: "Michael",
+		LastName:  "Caley",
+		Company:   "Globo ltd",
+		Address: Address{
+			Line1:    "53 Speed Way",
+			Line2:    "Shed Life",
+			Line3:    "",
+			PostCode: "SHED L1F3",
+		},
+		Email:   "Kneedeepwater@hotmail.com",
+		PhoneNo: "0775349612",
+	}, {
+		FirstName: "Michael",
+		LastName:  "Caley",
+		Company:   "Globo ltd",
+		Address: Address{
+			Line1:    "53 Speed Way",
+			Line2:    "Shed Life",
+			Line3:    "",
+			PostCode: "SHED L1F3",
+		},
+		Email:   "Kneedeepwater@hotmail.com",
+		PhoneNo: "0775349612",
+	},
+	{
+		FirstName: "Sophie",
+		LastName:  "Tan",
+		Company:   "Globo ltd",
+		Address: Address{
+			Line1:    "53 Speed Way",
+			Line2:    "Shed Life",
+			Line3:    "",
+			PostCode: "SHED L1F3",
+		},
+		Email:   "Shee@hotmail.com",
+		PhoneNo: "0775349612",
 	},
 }
 

@@ -30,6 +30,7 @@ function useQuery<State, SetState extends Function>(
         setState(resContacts);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
 

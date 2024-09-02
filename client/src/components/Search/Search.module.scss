@@ -1,0 +1,33 @@
+@import "../../styles/colours.scss";
+
+.search {
+  padding: 1rem;
+  margin-right: 1rem;
+  border-right: 0.2px solid #303036;
+  min-height: 100vh;
+
+  &__letter {
+    display: block;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      background-color: #3d3d43;
+      border-radius: 5px;
+    }
+  }
+}
+
+.input {
+  padding: 0.5rem 0.75rem;
+  background-color: $black;
+  color: $white;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 5px;
+  border: solid 0.1px #303036;
+  margin-bottom: 1rem;
+
+  &:focus-visible {
+    outline: 0.2px solid $white;
+  }
+}

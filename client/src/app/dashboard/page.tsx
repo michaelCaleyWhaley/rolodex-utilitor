@@ -1,10 +1,12 @@
 "use client";
 
 import { useQuery } from "@/hooks/useQuery";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { ContactCard } from "@/components/Contact-Card";
 import { Search } from "@/components/Search";
 import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
+
+import styles from "./page.module.scss";
 
 export type ContactAddress = {
   Line1: string;
@@ -55,18 +57,36 @@ export default function Dashboard() {
               },
               index
             ) => {
+              const isFirstIndex = index === 0;
+              const prevContact = contacts[index - 1];
+              const currContact = contacts[index];
+
+              const hasUniqueLetter =
+                isFirstIndex ||
+                (prevContact &&
+                  prevContact.LastName[0] !== currContact.LastName[0]);
+
               return (
-                <ContactCard
-                  key={`firstname=${FirstName}${index}`}
-                  FirstName={FirstName}
-                  LastName={LastName}
-                  Company={Company}
-                  Address={Address}
-                  Email={Email}
-                  PhoneNo={PhoneNo}
-                  ServiceStart={ServiceStart}
-                  ServiceFreq={ServiceFreq}
-                />
+                <Fragment key={`firstname=${FirstName}${index}`}>
+                  {hasUniqueLetter && (
+                    <h3
+                      className={styles["alpha-heading"]}
+                      id={currContact.LastName[0]}
+                    >
+                      {currContact.LastName[0]}
+                    </h3>
+                  )}
+                  <ContactCard
+                    FirstName={FirstName}
+                    LastName={LastName}
+                    Company={Company}
+                    Address={Address}
+                    Email={Email}
+                    PhoneNo={PhoneNo}
+                    ServiceStart={ServiceStart}
+                    ServiceFreq={ServiceFreq}
+                  />
+                </Fragment>
               );
             }
           )}

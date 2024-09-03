@@ -1,6 +1,9 @@
 import { Contact, ContactAddress } from "@/app/dashboard/page";
 
-import style from "./Contact-Card.module.scss";
+import styles from "./Contact-Card.module.scss";
+import { getLastFullYear } from "@/helpers/get-last-year";
+import { subtractYearFromDate } from "@/helpers/subtract-year-from-date";
+import { findNextService } from "@/helpers/find-next-service";
 
 function AddressLink({
   Address,
@@ -29,12 +32,17 @@ function ContactCard({
   ServiceStart,
   ServiceFreq,
 }: Contact) {
+  const prevYearService = findNextService(
+    ServiceStart,
+    ServiceFreq
+  )?.toDateString();
+
   return (
-    <ul className={style["card"]}>
-      <li className={style["first-name"]}>
+    <ul className={styles["card"]}>
+      <li className={styles["first-name"]}>
         {FirstName} {LastName}
       </li>
-      <li className={style["company"]}>{Company}</li>
+      <li className={styles["company"]}>{Company}</li>
 
       <li>
         <AddressLink Address={Address} text={Address.Line1} />
@@ -45,7 +53,7 @@ function ContactCard({
       <li>
         <AddressLink Address={Address} text={Address.Line3} />
       </li>
-      <li className={style["postcode"]}>
+      <li className={styles["postcode"]}>
         <AddressLink Address={Address} text={Address.PostCode} />
       </li>
       <li>
@@ -85,8 +93,11 @@ function ContactCard({
         </svg>
         {PhoneNo}
       </li>
-      <li>{ServiceStart}</li>
-      <li>{ServiceFreq}</li>
+      <li className={styles["service-start"]}>
+        Service start: {new Date(ServiceStart).toDateString()}
+      </li>
+      <li>Service freq: {ServiceFreq} monthly</li>
+      <li>Next Service: {prevYearService}</li>
     </ul>
   );
 }

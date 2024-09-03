@@ -1,5 +1,5 @@
 import { Contact } from "@/app/dashboard/page";
-import style from "./Search.module.scss";
+import styles from "./Search.module.scss";
 import { useEffect, useState } from "react";
 
 type PropTypes = { contacts: Contact[] | null };
@@ -22,14 +22,14 @@ function Search({ contacts }: PropTypes) {
   }, [contacts]);
 
   return (
-    <div className={style["search"]}>
-      <input className={style["input"]} placeholder="Search..." type="text" />
+    <div className={styles["search"]}>
+      <input className={styles["input"]} placeholder="Search..." type="text" />
 
       <ul>
         {alphabet &&
           alphabet.map((letter) => (
             <li key={`alpha${letter}`}>
-              <a className={style["search__letter"]} href={`#${letter}`}>
+              <a className={styles["search__letter"]} href={`#${letter}`}>
                 {letter}
               </a>
             </li>

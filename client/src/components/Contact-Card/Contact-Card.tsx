@@ -1,9 +1,6 @@
 import { Contact, ContactAddress } from "@/app/dashboard/page";
 
 import styles from "./Contact-Card.module.scss";
-import { getLastFullYear } from "@/helpers/get-last-year";
-import { subtractYearFromDate } from "@/helpers/subtract-year-from-date";
-import { findNextService } from "@/helpers/find-next-service";
 
 function AddressLink({
   Address,
@@ -31,12 +28,8 @@ function ContactCard({
   PhoneNo,
   ServiceStart,
   ServiceFreq,
+  NextService,
 }: Contact) {
-  const prevYearService = findNextService(
-    ServiceStart,
-    ServiceFreq
-  )?.toDateString();
-
   return (
     <ul className={styles["card"]}>
       <li className={styles["first-name"]}>
@@ -93,11 +86,9 @@ function ContactCard({
         </svg>
         {PhoneNo}
       </li>
-      <li className={styles["service-start"]}>
-        Service start: {new Date(ServiceStart).toDateString()}
-      </li>
+      <li className={styles["service-start"]}>Service start: {ServiceStart}</li>
       <li>Service freq: {ServiceFreq} monthly</li>
-      <li>Next Service: {prevYearService}</li>
+      <li>Next Service: {NextService}</li>
     </ul>
   );
 }

@@ -73,7 +73,6 @@ export default function Dashboard() {
       <SortContext.Provider value={{ sort, setSort }}>
         <Search contacts={contacts} />
         <ul className="py-4">
-          {/* {console.log("contacts: ", contacts)} */}
           {contacts &&
             contacts.map(
               (

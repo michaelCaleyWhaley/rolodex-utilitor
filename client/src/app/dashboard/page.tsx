@@ -73,7 +73,7 @@ export default function Dashboard() {
     <main className="flex flex-row">
       <SortContext.Provider value={{ sort, setSort }}>
         <Search contacts={contacts} />
-        <ul className="py-4">
+        <ul className="py-4 min-w-0">
           {contacts &&
             contacts.map(
               (

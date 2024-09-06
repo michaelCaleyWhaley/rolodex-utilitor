@@ -35,21 +35,23 @@ function ContactCard({
       <li className={styles["first-name"]}>
         {FirstName} {LastName}
       </li>
-      <li className={styles["company"]}>{Company}</li>
+      <li className={`${styles["company"]} ${styles["contact-li"]}`}>
+        {Company}
+      </li>
 
-      <li>
+      <li className={styles["contact-li"]}>
         <AddressLink Address={Address} text={Address.Line1} />
       </li>
-      <li>
+      <li className={styles["contact-li"]}>
         <AddressLink Address={Address} text={Address.Line2} />
       </li>
-      <li>
+      <li className={styles["contact-li"]}>
         <AddressLink Address={Address} text={Address.Line3} />
       </li>
       <li className={styles["postcode"]}>
         <AddressLink Address={Address} text={Address.PostCode} />
       </li>
-      <li>
+      <li className={styles["contact-li"]}>
         <svg
           data-id="20"
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +70,7 @@ function ContactCard({
         </svg>{" "}
         {Email}
       </li>
-      <li>
+      <li className={styles["contact-li"]}>
         <svg
           data-id="18"
           xmlns="http://www.w3.org/2000/svg"
@@ -87,8 +89,10 @@ function ContactCard({
         {PhoneNo}
       </li>
       <li className={styles["service-start"]}>Service start: {ServiceStart}</li>
-      <li>Service freq: {ServiceFreq} monthly</li>
-      <li>Next Service: {NextService}</li>
+      <li className={styles["contact-li"]}>
+        Service freq: {ServiceFreq} monthly
+      </li>
+      <li className={styles["contact-li"]}>Next Service: {NextService}</li>
     </ul>
   );
 }

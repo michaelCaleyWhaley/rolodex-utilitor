@@ -1,5 +1,6 @@
-import { Contact } from "@/app/dashboard/page";
 import { useEffect, useState } from "react";
+
+import { Contact } from "@/app/dashboard/page";
 
 import styles from "./Letter-List.module.scss";
 

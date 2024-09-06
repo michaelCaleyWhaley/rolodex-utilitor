@@ -1,16 +1,17 @@
 "use client";
 
-import { useQuery } from "@/hooks/useQuery";
 import { Fragment, useEffect, useState } from "react";
+
 import { ContactCard } from "@/components/Contact-Card";
 import { Search } from "@/components/Search";
-import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
-
-import styles from "./page.module.scss";
+import { months } from "@/constants/months";
 import { CONTEXT_ALPHA, SortContext } from "@/context/sort";
 import { findNextService } from "@/helpers/find-next-service";
+import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
 import { sortContactsNextService } from "@/helpers/sort-contacts-next-service";
-import { months } from "@/constants/months";
+import { useQuery } from "@/hooks/useQuery";
+
+import styles from "./page.module.scss";
 
 export type ContactAddress = {
   Line1: string;

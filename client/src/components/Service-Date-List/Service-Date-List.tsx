@@ -1,8 +1,9 @@
-import { Contact } from "@/app/dashboard/page";
 import { useEffect, useState } from "react";
 
-import styles from "./Service-Date-List.module.scss";
+import { Contact } from "@/app/dashboard/page";
 import { months } from "@/constants/months";
+
+import styles from "./Service-Date-List.module.scss";
 
 type PropTypes = { contacts: Contact[] | null };
 

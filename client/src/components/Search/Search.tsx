@@ -1,9 +1,11 @@
-import { Contact } from "@/app/dashboard/page";
-import styles from "./Search.module.scss";
 import { useContext } from "react";
+
+import { Contact } from "@/app/dashboard/page";
 import { CONTEXT_ALPHA, CONTEXT_SERVICE, SortContext } from "@/context/sort";
+
 import { LetterList } from "../Letter-List";
 import { ServiceDateList } from "../Service-Date-List";
+import styles from "./Search.module.scss";
 
 type PropTypes = { contacts: Contact[] | null };
 

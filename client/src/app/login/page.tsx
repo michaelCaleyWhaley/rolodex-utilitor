@@ -1,7 +1,8 @@
 "use client";
 
-import { apiUrl } from "@/config/urls";
 import { useEffect, useRef } from "react";
+
+import { apiUrl } from "@/config/urls";
 
 export default function Login() {
   const formRef = useRef<HTMLFormElement>(null);

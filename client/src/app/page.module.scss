@@ -1,0 +1,72 @@
+@import "../styles/colours.scss";
+
+.h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: $white;
+}
+
+.strap-line {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.hero {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+
+  @screen md {
+    flex-direction: row;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 700px;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    align-self: center;
+
+    @screen md {
+      max-width: 600px;
+    }
+  }
+
+  &__link-box {
+    display: block;
+    margin-bottom: 1rem;
+
+    @screen md {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    background-color: $white;
+    color: $black;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+
+    @screen md {
+      width: auto;
+      margin-bottom: 0;
+    }
+  }
+}

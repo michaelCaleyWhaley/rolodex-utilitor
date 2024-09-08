@@ -1,0 +1,18 @@
+@import "../../styles/colours.scss";
+
+.login {
+  svg path,
+  svg rect {
+    fill: $white;
+  }
+
+  svg {
+    width: 50%;
+    max-width: 150px;
+    height: auto;
+  }
+}
+
+.form {
+  display: none;
+}

@@ -23,7 +23,6 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- handle no service date
 - add a contact
 - update a contact
 - delete a contact

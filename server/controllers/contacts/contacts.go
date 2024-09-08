@@ -82,8 +82,8 @@ var contacts = []Contact{
 		},
 		Email:        "olivia.johnson@techwave.com",
 		PhoneNo:      "07562348912",
-		ServiceStart: "2021-07-18",
-		ServiceFreq:  4,
+		ServiceStart: "",
+		ServiceFreq:  0,
 	},
 	{
 		FirstName: "Noah",

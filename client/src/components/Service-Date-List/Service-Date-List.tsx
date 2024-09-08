@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { Contact } from "@/app/dashboard/page";
+import { FUTURE_DATE } from "@/constants/future-dates";
 import { months } from "@/constants/months";
 
 import styles from "./Service-Date-List.module.scss";
 
 type PropTypes = { contacts: Contact[] | null };
+
+const futureDateTime = new Date(FUTURE_DATE).getTime();
 
 export function ServiceDateList({ contacts }: PropTypes) {
   const [serviceDates, setServiceDates] = useState<string[]>([]);
@@ -14,7 +17,9 @@ export function ServiceDateList({ contacts }: PropTypes) {
     if (!contacts) return;
     const dates = [];
     for (const contact of contacts) {
-      const date: string = new Date(contact.NextService).toString();
+      const date: string = new Date(
+        contact.NextService ?? FUTURE_DATE
+      ).toString();
       if (serviceDates.indexOf(date) === -1 && dates.indexOf(date) === -1) {
         dates.push(date);
       }
@@ -45,6 +50,16 @@ export function ServiceDateList({ contacts }: PropTypes) {
             months[parseInt(new Date(date).getMonth().toString(), 10)];
 
           if (month === lastMonth) return null;
+
+          if (futureDateTime === new Date(date).getTime()) {
+            return (
+              <li key={`alpha${date}`}>
+                <a className={styles["date"]} href="#no-service">
+                  No service
+                </a>
+              </li>
+            );
+          }
 
           return (
             <li key={`alpha${date}`}>

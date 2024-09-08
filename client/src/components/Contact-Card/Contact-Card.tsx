@@ -88,11 +88,22 @@ function ContactCard({
         </svg>
         {PhoneNo}
       </li>
-      <li className={styles["service-start"]}>Service start: {ServiceStart}</li>
-      <li className={styles["contact-li"]}>
-        Service freq: {ServiceFreq} monthly
-      </li>
-      <li className={styles["contact-li"]}>Next Service: {NextService}</li>
+
+      {ServiceStart && (
+        <li className={styles["service-start"]}>
+          Service start: {ServiceStart}
+        </li>
+      )}
+
+      {ServiceFreq !== 0 && ServiceFreq && (
+        <li className={styles["contact-li"]}>
+          Service freq: {ServiceFreq} monthly
+        </li>
+      )}
+
+      {NextService && (
+        <li className={styles["contact-li"]}>Next Service: {NextService}</li>
+      )}
     </ul>
   );
 }

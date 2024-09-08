@@ -27,9 +27,9 @@ export type Contact = {
   Address: ContactAddress;
   Email: string;
   PhoneNo: string;
-  ServiceStart: string;
-  ServiceFreq: number;
-  NextService: string;
+  ServiceStart?: string;
+  ServiceFreq?: number;
+  NextService?: string;
 };
 
 export default function Dashboard() {
@@ -41,15 +41,20 @@ export default function Dashboard() {
       const sortedResp = sortContactsAlpha(resp);
 
       const enrichedResp = sortedResp.map((contact) => {
-        const prevYearService = findNextService(
-          contact.ServiceStart,
-          contact.ServiceFreq
-        )?.toDateString();
+        const nextService =
+          contact.ServiceFreq && contact.ServiceStart
+            ? findNextService(
+                contact.ServiceStart,
+                contact.ServiceFreq
+              )?.toDateString()
+            : null;
 
         return {
           ...contact,
-          NextService: prevYearService,
-          ServiceStart: new Date(contact.ServiceStart).toDateString(),
+          ...(nextService && { NextService: nextService }),
+          ...(contact.ServiceStart && {
+            ServiceStart: new Date(contact.ServiceStart).toDateString(),
+          }),
         };
       });
       setContacts(enrichedResp);
@@ -102,8 +107,15 @@ export default function Dashboard() {
                 const hasUniqueDate =
                   isFirstIndex ||
                   (prevContact &&
+                    prevContact.NextService &&
+                    currContact.NextService &&
                     new Date(prevContact.NextService).getMonth() !==
                       new Date(currContact.NextService).getMonth());
+
+                const hasNoServiceHeading =
+                  !isFirstIndex &&
+                  prevContact.NextService &&
+                  !currContact.NextService;
 
                 return (
                   <Fragment key={`firstname=${FirstName}${index}`}>
@@ -120,10 +132,22 @@ export default function Dashboard() {
                       <h3
                         className={styles["alpha-heading"]}
                         id={
-                          months[new Date(currContact.NextService).getMonth()]
+                          currContact.NextService
+                            ? months[
+                                new Date(currContact.NextService).getMonth()
+                              ]
+                            : "no-service"
                         }
                       >
-                        {months[new Date(currContact.NextService).getMonth()]}
+                        {currContact.NextService
+                          ? months[new Date(currContact.NextService).getMonth()]
+                          : "no-service"}
+                      </h3>
+                    )}
+
+                    {hasNoServiceHeading && (
+                      <h3 className={styles["alpha-heading"]} id="no-service">
+                        No service
                       </h3>
                     )}
 

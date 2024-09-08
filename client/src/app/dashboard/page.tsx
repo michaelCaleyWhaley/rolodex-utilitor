@@ -117,9 +117,16 @@ export default function Dashboard() {
                   prevContact.NextService &&
                   !currContact.NextService;
 
+                const showAlphaHeading =
+                  sort === CONTEXT_ALPHA && hasUniqueLetter;
+                const showServiceHeading =
+                  sort !== CONTEXT_ALPHA && hasUniqueDate;
+                const showNoServiceHeading =
+                  hasNoServiceHeading && sort !== CONTEXT_ALPHA;
+
                 return (
                   <Fragment key={`firstname=${FirstName}${index}`}>
-                    {sort === CONTEXT_ALPHA && hasUniqueLetter && (
+                    {showAlphaHeading && (
                       <h3
                         className={styles["alpha-heading"]}
                         id={currContact.LastName[0]}
@@ -128,7 +135,7 @@ export default function Dashboard() {
                       </h3>
                     )}
 
-                    {sort !== CONTEXT_ALPHA && hasUniqueDate && (
+                    {showServiceHeading && (
                       <h3
                         className={styles["alpha-heading"]}
                         id={
@@ -145,7 +152,7 @@ export default function Dashboard() {
                       </h3>
                     )}
 
-                    {hasNoServiceHeading && (
+                    {showNoServiceHeading && (
                       <h3 className={styles["alpha-heading"]} id="no-service">
                         No service
                       </h3>

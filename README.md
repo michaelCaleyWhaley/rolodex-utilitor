@@ -21,8 +21,15 @@ S3: http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
 API gateway: https://nh0hmn0bzk.execute-api.eu-west-2.amazonaws.com/deployed
 cloudfront: https://d12si818kne643.cloudfront.net/
 
+## Secrets
+* CLIENT_ID is the cognito client id.
+* CLIENT_SECRET is the cognito client secret.
+
 ## Todo
 
+- connect to db using sqlectron
+- seed some data
+- connect to database using go
 - add a contact
 - update a contact
 - delete a contact

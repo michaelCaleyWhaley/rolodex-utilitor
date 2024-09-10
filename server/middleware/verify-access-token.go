@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
 	"strings"
 	"utilitor/constants"
@@ -13,14 +12,11 @@ import (
 )
 
 func VerifyAccessToken(c *gin.Context) {
-	log.Println("LOG: ")
-
 	origin := c.Request.Header.Get("Origin")
 
 	authCookie, atCookieErr := c.Request.Cookie(constants.AUTH)
 
 	authSlice := strings.Split(authCookie.Value, constants.COOKIE_SEPERATOR)
-
 	if atCookieErr != nil && len(authSlice) == 2 {
 		servicesGin.ErrRedirect(c, origin, atCookieErr, "no auth cookie")
 		return

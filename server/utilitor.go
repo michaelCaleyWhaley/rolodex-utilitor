@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	addcontact "utilitor/controllers/add-contact"
 	"utilitor/controllers/code"
 	"utilitor/controllers/contacts"
 	"utilitor/initialisers"
@@ -22,6 +23,7 @@ func routes(r *gin.Engine) {
 	r.Use(middleware.CrossOrigin)
 	r.POST("/api/code", code.Controller)
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)
+	r.POST("/api/contact/add", middleware.VerifyAccessToken, addcontact.Controller)
 }
 
 func init() {

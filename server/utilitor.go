@@ -9,7 +9,7 @@ import (
 	"utilitor/controllers/contacts"
 	"utilitor/initialisers"
 	"utilitor/middleware"
-	rolopostgress "utilitor/services/rolo-postgress"
+	"utilitor/services/database"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -22,7 +22,7 @@ var isLocal = os.Args[len(os.Args)-1] == "--local"
 
 func routes(r *gin.Engine) {
 	// //////////////////////
-	rolopostgress.GetContacts()
+	database.GetContacts()
 	// //////////////////////
 
 	r.Use(middleware.CrossOrigin)

@@ -27,7 +27,8 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- connect to db using sqlectron
+- put item in database
+- get item from database
 - seed some data
 - connect to database using go
 - add a contact

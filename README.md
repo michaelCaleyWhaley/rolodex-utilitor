@@ -27,6 +27,7 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
+- test getting data from endpoint with postman
 - put item in database
 - get item from database
 - seed some data

@@ -1,7 +1,11 @@
 package addcontact
 
 import (
+	"log"
 	"net/http"
+	"utilitor/constants"
+	cogHelpers "utilitor/services/cog"
+	"utilitor/services/database"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,20 +30,26 @@ type ContactJson struct {
 
 func Controller(c *gin.Context) {
 	user, hasUser := c.Get("User")
-	if !hasUser {
+	typedUser, ok := user.(cogHelpers.UserInfoTokenResponse)
+	if !hasUser && !ok {
 		c.JSON(http.StatusForbidden, gin.H{
 			"message": "User not found.",
 		})
 		return
 	}
 
-	var newContact ContactJson
+	var newContact constants.Contact
 	if err := c.BindJSON(&newContact); err != nil {
 		c.JSON(http.StatusForbidden, gin.H{
 			"message": "Invalid contact details.",
 		})
 		return
 	}
+
+	// CHECK USER EXISTS
+	// CHECK CONTACT DOESN'T EXIST
+	update, _ := database.UpdateContact(typedUser.Username, typedUser.Email, newContact)
+	log.Println("update: ", update)
 
 	c.JSON(http.StatusOK, gin.H{
 		"NewContact":   newContact,

@@ -27,12 +27,7 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
-- test getting data from endpoint with postman
-- put item in database
-- get item from database
-- seed some data
-- connect to database using go
-- add a contact
+- controllers\add-contact\add-contact.go
 - update a contact
 - delete a contact
 

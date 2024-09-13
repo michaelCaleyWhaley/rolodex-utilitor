@@ -4,12 +4,10 @@ import (
 	"context"
 	"log"
 	"utilitor/constants"
-	"utilitor/controllers/contacts"
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/aws/aws-sdk-go/aws"
 )
 
@@ -19,21 +17,9 @@ type DynamoTable struct {
 }
 
 type UserData struct {
-	UserName string             `dynamodbav:"UserName"`
-	Email    string             `dynamodbav:"Email"`
-	Contacts []contacts.Contact `dynamodbav:"Contacts"`
-}
-
-func (contact UserData) GetKey() map[string]types.AttributeValue {
-	UserName, err := attributevalue.Marshal(contact.UserName)
-	if err != nil {
-		panic(err)
-	}
-	email, err := attributevalue.Marshal(contact.Email)
-	if err != nil {
-		panic(err)
-	}
-	return map[string]types.AttributeValue{"UserName": UserName, "Email": email}
+	UserName string              `dynamodbav:"UserName"`
+	Email    string              `dynamodbav:"Email"`
+	Contacts []constants.Contact `dynamodbav:"Contacts"`
 }
 
 func (basics DynamoTable) getUserData(UserName string, email string) (UserData, error) {
@@ -54,7 +40,7 @@ func (basics DynamoTable) getUserData(UserName string, email string) (UserData, 
 	return contactRes, err
 }
 
-func GetContacts() {
+func GetContacts(UserName string, email string) (UserData, error) {
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
@@ -65,14 +51,8 @@ func GetContacts() {
 	dynamoTable := DynamoTable{TableName: constants.DB_TABLE_NAME,
 		DynamoDbClient: client}
 
-	userData, err := dynamoTable.getUserData("16725254-e031-70c3-2839-d032122c920e", "kneedeepwater@hotmail.com")
+	userData, err := dynamoTable.getUserData(UserName, email)
 
-	if err != nil {
-		log.Println("ERROR: ", err)
-
-	} else {
-
-		log.Println("here: ", userData)
-	}
+	return userData, err
 
 }

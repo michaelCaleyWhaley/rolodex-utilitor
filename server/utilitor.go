@@ -9,7 +9,6 @@ import (
 	"utilitor/controllers/contacts"
 	"utilitor/initialisers"
 	"utilitor/middleware"
-	"utilitor/services/database"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -21,10 +20,6 @@ var ginLambda *ginadapter.GinLambda
 var isLocal = os.Args[len(os.Args)-1] == "--local"
 
 func routes(r *gin.Engine) {
-	// //////////////////////
-	database.GetContacts()
-	// //////////////////////
-
 	r.Use(middleware.CrossOrigin)
 	r.POST("/api/code", code.Controller)
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)

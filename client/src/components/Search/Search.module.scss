@@ -36,4 +36,12 @@
   &:focus-visible {
     outline: 0.2px solid $white;
   }
+
+  &--left-align {
+    text-align: left;
+
+    &:hover {
+      background-color: #3d3d43;
+    }
+  }
 }

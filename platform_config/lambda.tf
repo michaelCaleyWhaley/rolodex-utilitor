@@ -29,10 +29,25 @@ resource "aws_iam_policy" "function_logging_policy" {
       {
         Action : [
           "logs:CreateLogStream",
-          "logs:PutLogEvents"
+          "logs:PutLogEvents",
         ],
         Effect : "Allow",
         Resource : "arn:aws:logs:*:*:*"
+      },
+      {
+        Effect : "Allow",
+        Action : [
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:ConditionCheckItem",
+          "dynamodb:PutItem",
+          "dynamodb:DescribeTable",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem"
+        ],
+        "Resource" : aws_dynamodb_table.rolodex-dynamodb-table.arn
       }
     ]
   })

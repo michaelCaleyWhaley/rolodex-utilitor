@@ -1,7 +1,6 @@
-package addcontact
+package updateContact
 
 import (
-	"log"
 	"net/http"
 	"utilitor/constants"
 	cogHelpers "utilitor/services/cog"
@@ -46,13 +45,9 @@ func Controller(c *gin.Context) {
 		return
 	}
 
-	// CHECK USER EXISTS
-	// CHECK CONTACT DOESN'T EXIST
 	update, _ := database.UpdateContact(typedUser.Username, typedUser.Email, newContact)
-	log.Println("update: ", update)
 
 	c.JSON(http.StatusOK, gin.H{
-		"NewContact":   newContact,
-		"VerifiedUser": user,
+		"Contacts": update.Contacts,
 	})
 }

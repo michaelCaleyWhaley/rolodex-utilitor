@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"errors"
 	"log"
 	"utilitor/constants"
 
@@ -52,6 +53,10 @@ func GetContacts(UserName string, email string) (UserData, error) {
 		DynamoDbClient: client}
 
 	userData, err := dynamoTable.getUserData(UserName, email)
+
+	if len(userData.UserName) == 0 {
+		return UserData{}, errors.New("no user found")
+	}
 
 	return userData, err
 

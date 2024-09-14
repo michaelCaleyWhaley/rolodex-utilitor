@@ -20,10 +20,14 @@ func Controller(c *gin.Context) {
 
 	userData, err := database.GetContacts(typedUser.Username, typedUser.Email)
 	if err != nil {
-		c.JSON(http.StatusForbidden, gin.H{
-			"message": "User data not found.",
-		})
-		return
+		_, createErr := database.CreateUser(typedUser.Username, typedUser.Email)
+
+		if createErr != nil {
+			c.JSON(http.StatusForbidden, gin.H{
+				"message": "User data not found.",
+			})
+			return
+		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{

@@ -2,10 +2,8 @@
 
 import { Fragment } from "react";
 
-import { Bottomsheet } from "@/components/Bottomsheet";
 import { ContactCard } from "@/components/Contact-Card";
 import { Search } from "@/components/Search";
-import { contactFields } from "@/constants/contact";
 import { months } from "@/constants/months";
 import { CONTEXT_ALPHA, SortContext } from "@/context/sort";
 
@@ -134,21 +132,6 @@ export default function Dashboard() {
               }
             )}
         </ul>
-        <Bottomsheet>
-          <form action="" method="post">
-            {contactFields.map((field, index) => (
-              <div key={index}>
-                <label htmlFor={field.name}>{field.label}</label>
-                <input
-                  type={field.type}
-                  name={field.name}
-                  id={field.name}
-                  required={field.required}
-                />
-              </div>
-            ))}
-          </form>
-        </Bottomsheet>
       </SortContext.Provider>
     </main>
   );

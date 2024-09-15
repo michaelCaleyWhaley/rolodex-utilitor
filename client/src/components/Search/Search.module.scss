@@ -3,7 +3,7 @@
 .search {
   padding: 1rem;
   margin-right: 1rem;
-  border-right: 0.2px solid #303036;
+  border-right: 0.2px solid $border;
   min-height: 100vh;
   width: 40%;
   max-width: 200px;
@@ -15,7 +15,7 @@
   background-color: $black;
   padding: 0.5rem 0.75rem;
   margin-bottom: 1rem;
-  border: solid 0.1px #303036;
+  border: solid 0.1px $border;
   border-radius: 5px;
   width: 100%;
   color: $white;
@@ -29,7 +29,7 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   border-radius: 5px;
-  border: solid 0.1px #303036;
+  border: solid 0.1px $border;
   margin-bottom: 0.5rem;
   width: 100%;
 

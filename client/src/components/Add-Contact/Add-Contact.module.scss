@@ -1,0 +1,83 @@
+@import "../../styles/colours.scss";
+
+.portal {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transition: transform 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: translate(-50%, 100%);
+  max-height: 700px;
+  height: 80%;
+  overflow: auto;
+
+  &--animate {
+    transform: translate(-50%, 0);
+  }
+
+  background-color: #18181b;
+  padding: 1rem;
+  border-radius: 5px 5px 0 0;
+  border: solid 0.1px $border;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.input {
+  padding: 0.5rem 0.75rem;
+  background-color: $black;
+  color: $white;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 5px;
+  border: solid 0.1px $border;
+  margin-bottom: 0.5rem;
+  width: 100%;
+
+  &:focus-visible {
+    outline: 0.2px solid $white;
+  }
+
+  &--left-align {
+    text-align: left;
+
+    &:hover {
+      background-color: #3d3d43;
+    }
+  }
+
+  &--required {
+    border: solid 0.1px $required;
+  }
+
+  &--submit {
+    margin-top: 1.5rem;
+    background-color: $offWhite;
+  }
+}
+
+.label-add {
+  display: block;
+  font-size: 0.6rem;
+  line-height: 0.9rem;
+}
+
+.input-add {
+  display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &--animate {
+    opacity: 0.3;
+  }
+}

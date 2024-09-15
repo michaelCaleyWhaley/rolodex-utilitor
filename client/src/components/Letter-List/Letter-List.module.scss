@@ -1,9 +1,9 @@
 .letter {
   display: block;
   padding: 0.5rem 0.75rem;
+  border-radius: 5px;
 
   &:hover {
     background-color: #3d3d43;
-    border-radius: 5px;
   }
 }

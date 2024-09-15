@@ -4,6 +4,7 @@ import { Contact } from "@/app/dashboard/page";
 import { SORT_KEY } from "@/constants/local-storage";
 import { CONTEXT_ALPHA, CONTEXT_SERVICE, SortContext } from "@/context/sort";
 
+import { AddContact } from "../Add-Contact";
 import { LetterList } from "../Letter-List";
 import { ServiceDateList } from "../Service-Date-List";
 import styles from "./Search.module.scss";
@@ -25,6 +26,8 @@ function Search({ contacts }: PropTypes) {
 
   return (
     <div className={styles["search"]}>
+      <AddContact />
+
       <input className={styles["input"]} placeholder="Search..." type="text" />
 
       <select

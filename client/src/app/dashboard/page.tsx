@@ -1,17 +1,14 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 
 import { ContactCard } from "@/components/Contact-Card";
 import { Search } from "@/components/Search";
 import { months } from "@/constants/months";
 import { CONTEXT_ALPHA, SortContext } from "@/context/sort";
-import { findNextService } from "@/helpers/find-next-service";
-import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
-import { sortContactsNextService } from "@/helpers/sort-contacts-next-service";
-import { useQuery } from "@/hooks/useQuery";
 
 import styles from "./page.module.scss";
+import { useDashboard } from "./useDashboard";
 
 export type ContactAddress = {
   Line1: string;
@@ -33,46 +30,7 @@ export type Contact = {
 };
 
 export default function Dashboard() {
-  const [sort, setSort] = useState(CONTEXT_ALPHA);
-  const [contacts, setContacts] = useState<Contact[] | null>(null);
-  useQuery(
-    contacts,
-    (resp: Contact[]) => {
-      const sortedResp = sortContactsAlpha(resp);
-
-      const enrichedResp = sortedResp.map((contact) => {
-        const nextService =
-          contact.ServiceFreq && contact.ServiceStart
-            ? findNextService(
-                contact.ServiceStart,
-                contact.ServiceFreq
-              )?.toDateString()
-            : null;
-
-        return {
-          ...contact,
-          ...(nextService && { NextService: nextService }),
-          ...(contact.ServiceStart && {
-            ServiceStart: new Date(contact.ServiceStart).toDateString(),
-          }),
-        };
-      });
-      setContacts(enrichedResp);
-    },
-    "/api/contact/list",
-    "contacts"
-  );
-
-  useEffect(() => {
-    if (!contacts) return;
-
-    if (sort === CONTEXT_ALPHA) {
-      setContacts(new Array(...sortContactsAlpha(contacts)));
-      return;
-    }
-    setContacts(new Array(...sortContactsNextService(contacts)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sort]);
+  const { sort, setSort, contacts } = useDashboard();
 
   return (
     <main className="flex flex-row">

@@ -3,9 +3,13 @@ import { createPortal } from "react-dom";
 
 import { contactFields } from "@/constants/contact";
 import { scrollLock } from "@/helpers/scroll-lock";
+import { postData } from "@/services/post-data";
+import { Contact } from "@/types/contact";
 
 import { Button } from "../Button";
 import styles from "./Add-Contact.module.scss";
+
+const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 
 function AddContact() {
   const [open, setIsOpen] = useState(false);
@@ -42,16 +46,48 @@ function AddContact() {
     e.preventDefault();
     if (!formRef) return;
     const inputs = formRef.current?.getElementsByTagName("input") ?? [];
+    const requiredFields: Record<string, boolean> = {};
+    const newContact: Partial<Contact> = {
+      Address: { Line1: "", Line2: "", Line3: "", PostCode: "" },
+    };
 
     for (let i = 0; i < inputs.length; i++) {
       const { value } = inputs[i];
       if (value.length) {
         inputs[i].classList.remove(styles["input--required"]);
-        return;
+        const key = inputs[i].name as keyof typeof newContact;
+        const isNestedKey = nestedKeys.includes(key);
+        if (isNestedKey) {
+          // @ts-expect-error
+          newContact.Address[key] = inputs[i].value;
+        } else {
+          // @ts-expect-error
+          newContact[key] =
+            inputs[i].type === "number"
+              ? parseInt(inputs[i].value, 10)
+              : inputs[i].value;
+        }
+        requiredFields[inputs[i].name] = true;
+        delete requiredFields[inputs[i].name];
+      } else {
+        inputs[i].classList.add(styles["input--required"]);
+        inputs[i].placeholder = "required";
+        requiredFields[inputs[i].name] = true;
       }
-      inputs[i].classList.add(styles["input--required"]);
-      inputs[i].placeholder = "required";
     }
+
+    if (Object.keys(requiredFields).length) {
+      return;
+    }
+
+    const postRes = postData(
+      "/api/contact/update",
+      "contacts",
+      JSON.stringify(newContact)
+    );
+
+    // SET THE CONTACTS
+    console.log("postRes: ", postRes);
   };
 
   return (

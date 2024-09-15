@@ -48,6 +48,6 @@ func Controller(c *gin.Context) {
 	update, _ := database.UpdateContact(typedUser.Username, typedUser.Email, newContact)
 
 	c.JSON(http.StatusOK, gin.H{
-		"Contacts": update.Contacts,
+		"contacts": update.Contacts,
 	})
 }

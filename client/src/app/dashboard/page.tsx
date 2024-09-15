@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 import { ContactCard } from "@/components/Contact-Card";
 import { Search } from "@/components/Search";
@@ -30,12 +30,13 @@ export type Contact = {
 };
 
 export default function Dashboard() {
-  const { sort, setSort, contacts } = useDashboard();
+  const [contactRefresh, setContactRefresh] = useState(1);
+  const { sort, setSort, contacts } = useDashboard(contactRefresh);
 
   return (
     <main className="flex flex-row">
       <SortContext.Provider value={{ sort, setSort }}>
-        <Search contacts={contacts} />
+        <Search contacts={contacts} setContactRefresh={setContactRefresh} />
         <ul className="py-4 min-w-0">
           {contacts &&
             contacts.map(

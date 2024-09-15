@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useRef } from "react";
 
 import { Contact } from "@/app/dashboard/page";
 import { SORT_KEY } from "@/constants/local-storage";
@@ -9,9 +9,12 @@ import { LetterList } from "../Letter-List";
 import { ServiceDateList } from "../Service-Date-List";
 import styles from "./Search.module.scss";
 
-type PropTypes = { contacts: Contact[] | null };
+type PropTypes = {
+  contacts: Contact[] | null;
+  setContactRefresh: Dispatch<SetStateAction<Number>>;
+};
 
-function Search({ contacts }: PropTypes) {
+function Search({ contacts, setContactRefresh }: PropTypes) {
   const selectRef = useRef<HTMLSelectElement>(null);
   const { sort: sortContext, setSort } = useContext(SortContext);
   const isAlpha = sortContext === CONTEXT_ALPHA;
@@ -26,7 +29,7 @@ function Search({ contacts }: PropTypes) {
 
   return (
     <div className={styles["search"]}>
-      <AddContact />
+      <AddContact setContactRefresh={setContactRefresh} />
 
       <input className={styles["input"]} placeholder="Search..." type="text" />
 

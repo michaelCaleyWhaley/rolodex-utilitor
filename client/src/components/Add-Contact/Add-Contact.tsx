@@ -1,4 +1,11 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 
 import { contactFields } from "@/constants/contact";
@@ -11,7 +18,12 @@ import styles from "./Add-Contact.module.scss";
 
 const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 
-function AddContact() {
+function AddContact({
+  setContactRefresh,
+}: {
+  setContactRefresh: Dispatch<SetStateAction<Number>>;
+}) {
+  const [loading, setLoading] = useState(false);
   const [open, setIsOpen] = useState(false);
   const [slide, setIsSlide] = useState(false);
 
@@ -42,8 +54,10 @@ function AddContact() {
     openBottomsheet();
   };
 
-  const handleFormSubmission = (e: MouseEvent<HTMLElement>) => {
+  const handleFormSubmission = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    (e.target as HTMLButtonElement).disabled = true;
+
     if (!formRef) return;
     const inputs = formRef.current?.getElementsByTagName("input") ?? [];
     const requiredFields: Record<string, boolean> = {};
@@ -80,14 +94,18 @@ function AddContact() {
       return;
     }
 
-    const postRes = postData(
+    setLoading(true);
+    const postRes = await postData(
       "/api/contact/update",
       "contacts",
       JSON.stringify(newContact)
     );
+    setLoading(false);
 
-    // SET THE CONTACTS
-    console.log("postRes: ", postRes);
+    if (!postRes.length) return;
+
+    setContactRefresh(new Date().getTime());
+    closeBottomsheet();
   };
 
   return (
@@ -124,10 +142,21 @@ function AddContact() {
                   </div>
                 ))}
                 <Button
-                  text="Save"
                   onClick={handleFormSubmission}
                   className={`${styles["input"]} ${styles["input--submit"]}`}
-                />
+                >
+                  <>
+                    {loading ? (
+                      <div className={styles["wave"]}>
+                        <span className={styles["dot"]}></span>
+                        <span className={styles["dot"]}></span>
+                        <span className={styles["dot"]}></span>
+                      </div>
+                    ) : (
+                      <>Save</>
+                    )}
+                  </>
+                </Button>
               </form>
             </div>
           </>,

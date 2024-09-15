@@ -8,7 +8,7 @@ import { useQuery } from "@/hooks/useQuery";
 
 import { Contact } from "./page";
 
-function useDashboard(): {
+function useDashboard(contactRefresh: number): {
   sort: string;
   setSort: Dispatch<SetStateAction<string>>;
   contacts: Contact[] | null;
@@ -41,7 +41,8 @@ function useDashboard(): {
       setContacts(enrichedResp);
     },
     "/api/contact/list",
-    "contacts"
+    "contacts",
+    contactRefresh
   );
 
   useEffect(() => {

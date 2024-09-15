@@ -26,7 +26,7 @@ export default function Home() {
             </a>
             <a
               className={styles["hero__link"]}
-              href={`https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=${encodeURI(
+              href={`https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/signup?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=${encodeURI(
                 loginUrl
               )}`}
             >

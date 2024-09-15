@@ -11,7 +11,7 @@ import styles from "./Search.module.scss";
 
 type PropTypes = {
   contacts: Contact[] | null;
-  setContactRefresh: Dispatch<SetStateAction<Number>>;
+  setContactRefresh: Dispatch<SetStateAction<number>>;
 };
 
 function Search({ contacts, setContactRefresh }: PropTypes) {

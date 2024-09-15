@@ -21,7 +21,7 @@ const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 function AddContact({
   setContactRefresh,
 }: {
-  setContactRefresh: Dispatch<SetStateAction<Number>>;
+  setContactRefresh: Dispatch<SetStateAction<number>>;
 }) {
   const [loading, setLoading] = useState(false);
   const [open, setIsOpen] = useState(false);

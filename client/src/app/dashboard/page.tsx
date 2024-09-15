@@ -60,7 +60,8 @@ export default function Dashboard() {
                 const hasUniqueLetter =
                   isFirstIndex ||
                   (prevContact &&
-                    prevContact.LastName[0] !== currContact.LastName[0]);
+                    prevContact.LastName[0].toUpperCase() !==
+                      currContact.LastName[0].toUpperCase());
 
                 const hasUniqueDate =
                   isFirstIndex ||
@@ -87,9 +88,9 @@ export default function Dashboard() {
                     {showAlphaHeading && (
                       <h3
                         className={styles["alpha-heading"]}
-                        id={currContact.LastName[0]}
+                        id={currContact.LastName[0].toUpperCase()}
                       >
-                        {currContact.LastName[0]}
+                        {currContact.LastName[0].toUpperCase()}
                       </h3>
                     )}
 

@@ -2,6 +2,7 @@ import { MouseEvent, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { contactFields } from "@/constants/contact";
+import { scrollLock } from "@/helpers/scroll-lock";
 
 import { Button } from "../Button";
 import styles from "./Add-Contact.module.scss";
@@ -16,9 +17,17 @@ function AddContact() {
     return setIsOpen(false);
   }, []);
 
+  const openBottomsheet = () => {
+    setIsOpen(true);
+    setTimeout(() => setIsSlide(true), 10);
+    formRef.current?.focus();
+    scrollLock.on();
+  };
+
   const closeBottomsheet = () => {
     setIsSlide(false);
     setTimeout(() => setIsOpen(false), 600);
+    scrollLock.off();
   };
 
   const handleBtnClick = () => {
@@ -26,8 +35,7 @@ function AddContact() {
       closeBottomsheet();
       return;
     }
-    setIsOpen(true);
-    setTimeout(() => setIsSlide(true), 10);
+    openBottomsheet();
   };
 
   const handleFormSubmission = (e: MouseEvent<HTMLElement>) => {

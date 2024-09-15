@@ -5,7 +5,12 @@ export const scrollLock = {
     document.body.style.position = "fixed";
   },
   off: () => {
+    const scrollDist = document.body.style.top;
+
     document.body.style.overflow = "auto";
     document.body.style.position = "relative";
+    document.body.style.top = "initial";
+
+    window.scrollTo(0, Math.abs(parseInt(scrollDist, 10)));
   },
 };

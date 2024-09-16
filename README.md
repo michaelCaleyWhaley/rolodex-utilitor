@@ -27,6 +27,8 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 
 ## Todo
 
+- src\components\Update-Contact\Update-Contact.tsx
+- controllers\update-contact\update-contact.go
 - src\components\Add-Contact\Add-Contact.tsx
 - ui add contact
 - update a contact

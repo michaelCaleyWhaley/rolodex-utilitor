@@ -27,6 +27,7 @@ export type Contact = {
   ServiceStart?: string;
   ServiceFreq?: number;
   NextService?: string;
+  ContactId: string;
 };
 
 export default function Dashboard() {
@@ -51,6 +52,7 @@ export default function Dashboard() {
                   ServiceStart,
                   ServiceFreq,
                   NextService,
+                  ContactId,
                 },
                 index
               ) => {
@@ -128,6 +130,8 @@ export default function Dashboard() {
                       ServiceStart={ServiceStart}
                       ServiceFreq={ServiceFreq}
                       NextService={NextService}
+                      ContactId={ContactId}
+                      setContactRefresh={setContactRefresh}
                     />
                   </Fragment>
                 );

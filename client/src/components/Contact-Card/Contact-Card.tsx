@@ -1,5 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
+
 import { Contact, ContactAddress } from "@/app/dashboard/page";
 
+import { UpdateContact } from "../Update-Contact";
 import styles from "./Contact-Card.module.scss";
 
 function AddressLink({
@@ -29,9 +32,15 @@ function ContactCard({
   ServiceStart,
   ServiceFreq,
   NextService,
-}: Contact) {
+  ContactId,
+  setContactRefresh,
+}: Contact & { setContactRefresh: Dispatch<SetStateAction<number>> }) {
   return (
-    <ul className={styles["card"]}>
+    <ul className={styles["card"]} data-contact-id={ContactId}>
+      <li>
+        <UpdateContact setContactRefresh={setContactRefresh} />
+      </li>
+
       <li className={styles["first-name"]}>
         {FirstName} {LastName}
       </li>

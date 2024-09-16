@@ -1,9 +1,10 @@
 @import "../../styles/colours.scss";
 
 .card {
+  position: relative;
   display: inline-block;
   background-color: #18181b;
-  padding: 1rem;
+  padding: 1rem calc(1rem + 5px) 1rem 1rem;
   border-radius: 5px;
   border: solid 0.1px $border;
   margin-right: 1rem;

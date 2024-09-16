@@ -1,10 +1,10 @@
 package updateContact
 
 import (
+	"log"
 	"net/http"
 	"utilitor/constants"
 	cogHelpers "utilitor/services/cog"
-	"utilitor/services/database"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,17 +37,22 @@ func Controller(c *gin.Context) {
 		return
 	}
 
-	var newContact constants.Contact
-	if err := c.BindJSON(&newContact); err != nil {
+	var updatedContact constants.Contact
+	if err := c.BindJSON(&updatedContact); err != nil {
 		c.JSON(http.StatusForbidden, gin.H{
 			"message": "Invalid contact details.",
 		})
 		return
 	}
 
-	update, _ := database.UpdateContact(typedUser.Username, typedUser.Email, newContact)
+	log.Println("typedUser: ", typedUser)
+	log.Println("updatedContact.ContactId: ", updatedContact.ContactId)
 
-	c.JSON(http.StatusOK, gin.H{
-		"contacts": update.Contacts,
-	})
+	// update, _ := database.AddContact(typedUser.Username, typedUser.Email, newContact)
+
+	// database.UpdateContact
+
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"contacts": update.Contacts,
+	// })
 }

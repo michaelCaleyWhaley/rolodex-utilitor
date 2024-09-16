@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Dispatch,
   MouseEvent,
@@ -13,12 +14,13 @@ import { scrollLock } from "@/helpers/scroll-lock";
 import { postData } from "@/services/post-data";
 import { Contact } from "@/types/contact";
 
+import cogImage from "../../public/cog.svg";
 import { Button } from "../Button";
-import styles from "./Add-Contact.module.scss";
+import styles from "./Update-Contact.module.scss";
 
 const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 
-function AddContact({
+function UpdateContact({
   setContactRefresh,
 }: {
   setContactRefresh: Dispatch<SetStateAction<number>>;
@@ -111,10 +113,18 @@ function AddContact({
   return (
     <>
       <Button
-        className={`${styles["input"]} ${styles["input--left-align"]}`}
-        text="Add Contact"
+        className={`${styles["cog"]}`}
         onClick={handleBtnClick}
-      />
+      >
+        <Image
+          className={styles["cog--image"]}
+          src={cogImage}
+          alt="Dream big with our easy to use contact management system."
+          width={701}
+          height={466}
+          loading="eager"
+        />
+      </Button>
       {open &&
         typeof window !== "undefined" &&
         createPortal(
@@ -166,4 +176,4 @@ function AddContact({
   );
 }
 
-export { AddContact };
+export { UpdateContact };

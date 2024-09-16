@@ -8,6 +8,7 @@ type Address struct {
 }
 
 type Contact struct {
+	ContactId    string
 	FirstName    string
 	LastName     string
 	Company      string

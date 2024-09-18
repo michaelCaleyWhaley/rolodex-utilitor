@@ -1,17 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { Contact, ContactAddress } from "@/app/dashboard/page";
+import { type Address, Contact } from "@/types/contact";
 
 import { UpdateContact } from "../Update-Contact";
 import styles from "./Contact-Card.module.scss";
 
-function AddressLink({
-  Address,
-  text,
-}: {
-  Address: ContactAddress;
-  text: string;
-}) {
+function AddressLink({ Address, text }: { Address: Address; text: string }) {
   return (
     <a
       href={`https://www.google.com/maps/search/?api=1&query=${Address.Line1}+${Address.Line2}+${Address.Line3}+${Address.PostCode}`}
@@ -38,7 +32,19 @@ function ContactCard({
   return (
     <ul className={styles["card"]} data-contact-id={ContactId}>
       <li>
-        <UpdateContact setContactRefresh={setContactRefresh} />
+        <UpdateContact
+          FirstName={FirstName}
+          LastName={LastName}
+          Company={Company}
+          Address={Address}
+          Email={Email}
+          PhoneNo={PhoneNo}
+          ServiceStart={ServiceStart}
+          ServiceFreq={ServiceFreq}
+          NextService={NextService}
+          ContactId={ContactId}
+          setContactRefresh={setContactRefresh}
+        />
       </li>
 
       <li className={styles["first-name"]}>

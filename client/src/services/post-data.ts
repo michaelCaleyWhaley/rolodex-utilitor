@@ -8,7 +8,7 @@ async function postData(endpoint: string, storageKey: string, body: BodyInit) {
     return;
   }
 
-  const json = await response.json();
+  const json = await response?.json().catch(() => null);
   const resContacts = json?.contacts;
 
   if (resContacts) {

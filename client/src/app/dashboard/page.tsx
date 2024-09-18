@@ -10,26 +10,6 @@ import { CONTEXT_ALPHA, SortContext } from "@/context/sort";
 import styles from "./page.module.scss";
 import { useDashboard } from "./useDashboard";
 
-export type ContactAddress = {
-  Line1: string;
-  Line2: string;
-  Line3: string;
-  PostCode: string;
-};
-
-export type Contact = {
-  FirstName: string;
-  LastName: string;
-  Company: string;
-  Address: ContactAddress;
-  Email: string;
-  PhoneNo: string;
-  ServiceStart?: string;
-  ServiceFreq?: number;
-  NextService?: string;
-  ContactId: string;
-};
-
 export default function Dashboard() {
   const [contactRefresh, setContactRefresh] = useState(1);
   const { sort, setSort, contacts } = useDashboard(contactRefresh);

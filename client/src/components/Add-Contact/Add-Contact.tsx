@@ -1,112 +1,27 @@
-import {
-  Dispatch,
-  MouseEvent,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 import { createPortal } from "react-dom";
 
-import { contactFields } from "@/constants/contact";
-import { scrollLock } from "@/helpers/scroll-lock";
-import { postData } from "@/services/post-data";
-import { Contact } from "@/types/contact";
+import { contactFields, nestedKeys } from "@/constants/contact";
+import { handleFormSubmission } from "@/helpers/handleFormSubmission";
+import { useContactForm } from "@/hooks/useContactForm";
 
 import { Button } from "../Button";
 import styles from "./Add-Contact.module.scss";
-
-const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 
 function AddContact({
   setContactRefresh,
 }: {
   setContactRefresh: Dispatch<SetStateAction<number>>;
 }) {
-  const [loading, setLoading] = useState(false);
-  const [open, setIsOpen] = useState(false);
-  const [slide, setIsSlide] = useState(false);
-
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    return setIsOpen(false);
-  }, []);
-
-  const openBottomsheet = () => {
-    setIsOpen(true);
-    setTimeout(() => setIsSlide(true), 10);
-    formRef.current?.focus();
-    scrollLock.on();
-  };
-
-  const closeBottomsheet = () => {
-    setIsSlide(false);
-    setTimeout(() => setIsOpen(false), 600);
-    scrollLock.off();
-  };
-
-  const handleBtnClick = () => {
-    if (open) {
-      closeBottomsheet();
-      return;
-    }
-    openBottomsheet();
-  };
-
-  const handleFormSubmission = async (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    (e.target as HTMLButtonElement).disabled = true;
-
-    if (!formRef) return;
-    const inputs = formRef.current?.getElementsByTagName("input") ?? [];
-    const requiredFields: Record<string, boolean> = {};
-    const newContact: Partial<Contact> = {
-      Address: { Line1: "", Line2: "", Line3: "", PostCode: "" },
-    };
-
-    for (let i = 0; i < inputs.length; i++) {
-      const { value } = inputs[i];
-      if (value.length) {
-        inputs[i].classList.remove(styles["input--required"]);
-        const key = inputs[i].name as keyof typeof newContact;
-        const isNestedKey = nestedKeys.includes(key);
-        if (isNestedKey) {
-          // @ts-expect-error
-          newContact.Address[key] = inputs[i].value;
-        } else {
-          // @ts-expect-error
-          newContact[key] =
-            inputs[i].type === "number"
-              ? parseInt(inputs[i].value, 10)
-              : inputs[i].value;
-        }
-        requiredFields[inputs[i].name] = true;
-        delete requiredFields[inputs[i].name];
-      } else {
-        inputs[i].classList.add(styles["input--required"]);
-        inputs[i].placeholder = "required";
-        requiredFields[inputs[i].name] = true;
-      }
-    }
-
-    if (Object.keys(requiredFields).length) {
-      return;
-    }
-
-    setLoading(true);
-    const postRes = await postData(
-      "/api/contact/add",
-      "contacts",
-      JSON.stringify(newContact)
-    );
-    setLoading(false);
-
-    if (!postRes.length) return;
-
-    setContactRefresh(new Date().getTime());
-    closeBottomsheet();
-  };
+  const {
+    loading,
+    setLoading,
+    handleBtnClick,
+    slide,
+    contactOpen,
+    closeBottomsheet,
+    formRef,
+  } = useContactForm();
 
   return (
     <>
@@ -115,7 +30,7 @@ function AddContact({
         text="Add Contact"
         onClick={handleBtnClick}
       />
-      {open &&
+      {contactOpen &&
         typeof window !== "undefined" &&
         createPortal(
           <>
@@ -127,6 +42,7 @@ function AddContact({
               className={`${styles["portal"]} ${slide ? styles["portal--animate"] : ""}`}
             >
               <form ref={formRef} action="" method="post">
+                <h3 className={styles["title"]}>Add</h3>
                 {contactFields.map((field, index) => (
                   <div key={index}>
                     <label className={styles["label-add"]} htmlFor={field.name}>
@@ -142,7 +58,18 @@ function AddContact({
                   </div>
                 ))}
                 <Button
-                  onClick={handleFormSubmission}
+                  onClick={(e) => {
+                    handleFormSubmission({
+                      e,
+                      formRef,
+                      styles,
+                      nestedKeys,
+                      setLoading,
+                      setContactRefresh,
+                      closeBottomsheet,
+                      endpoint: "/api/contact/add",
+                    });
+                  }}
                   className={`${styles["input"]} ${styles["input--submit"]}`}
                 >
                   <>

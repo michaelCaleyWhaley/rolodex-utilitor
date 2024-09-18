@@ -12,8 +12,10 @@ type Contact = {
   Address: Address;
   Email: string;
   PhoneNo: string;
-  ServiceStart: string;
-  ServiceFreq: number;
+  ServiceStart?: string;
+  ServiceFreq?: number;
+  NextService?: string;
+  ContactId: string;
 };
 
-export { type Contact };
+export { type Address, type Contact };

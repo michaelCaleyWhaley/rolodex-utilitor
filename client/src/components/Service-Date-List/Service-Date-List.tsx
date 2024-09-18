@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { Contact } from "@/app/dashboard/page";
 import { FUTURE_DATE } from "@/constants/future-dates";
 import { months } from "@/constants/months";
+import { Contact } from "@/types/contact";
 
 import styles from "./Service-Date-List.module.scss";
 

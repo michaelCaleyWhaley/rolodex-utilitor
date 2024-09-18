@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useContext, useEffect, useRef } from "react";
 
-import { Contact } from "@/app/dashboard/page";
 import { SORT_KEY } from "@/constants/local-storage";
 import { CONTEXT_ALPHA, CONTEXT_SERVICE, SortContext } from "@/context/sort";
+import { Contact } from "@/types/contact";
 
 import { AddContact } from "../Add-Contact";
 import { LetterList } from "../Letter-List";
@@ -25,6 +25,7 @@ function Search({ contacts, setContactRefresh }: PropTypes) {
     setSort(storedSort);
     if (!selectRef.current) return;
     selectRef.current.value = storedSort;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

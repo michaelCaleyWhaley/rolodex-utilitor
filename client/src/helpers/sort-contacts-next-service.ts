@@ -1,5 +1,5 @@
-import { Contact } from "@/app/dashboard/page";
 import { FUTURE_DATE } from "@/constants/future-dates";
+import { Contact } from "@/types/contact";
 
 export function sortContactsNextService(contacts: Contact[]) {
   return contacts.sort((a: Contact, b: Contact) => {

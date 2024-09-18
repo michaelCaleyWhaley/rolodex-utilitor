@@ -1,4 +1,4 @@
-import { Contact } from "@/app/dashboard/page";
+import { Contact } from "@/types/contact";
 
 export function sortContactsAlpha(contacts: Contact[]) {
   return contacts.sort((a: Contact, b: Contact) => {

@@ -5,8 +5,7 @@ import { findNextService } from "@/helpers/find-next-service";
 import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
 import { sortContactsNextService } from "@/helpers/sort-contacts-next-service";
 import { useQuery } from "@/hooks/useQuery";
-
-import { Contact } from "./page";
+import { Contact } from "@/types/contact";
 
 function useDashboard(contactRefresh: number): {
   sort: string;

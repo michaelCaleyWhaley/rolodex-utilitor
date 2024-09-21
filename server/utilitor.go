@@ -7,6 +7,7 @@ import (
 	addContact "utilitor/controllers/add-contact"
 	"utilitor/controllers/code"
 	"utilitor/controllers/contacts"
+	removeContact "utilitor/controllers/remove-contact"
 	updateContact "utilitor/controllers/update-contact"
 	"utilitor/initialisers"
 	"utilitor/middleware"
@@ -25,6 +26,7 @@ func routes(r *gin.Engine) {
 	r.POST("/api/code", code.Controller)
 	r.POST("/api/contact/add", middleware.VerifyAccessToken, addContact.Controller)
 	r.POST("/api/contact/update", middleware.VerifyAccessToken, updateContact.Controller)
+	r.POST("/api/contact/remove", middleware.VerifyAccessToken, removeContact.Controller)
 
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)
 }

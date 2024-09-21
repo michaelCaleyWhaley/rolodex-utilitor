@@ -17,7 +17,7 @@ const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 function UpdateContact(
   props: Contact & { setContactRefresh: Dispatch<SetStateAction<number>> }
 ) {
-  const { setContactRefresh } = props;
+  const { setContactRefresh, ContactId } = props;
   const {
     loading,
     setLoading,
@@ -91,6 +91,7 @@ function UpdateContact(
                       setContactRefresh,
                       closeBottomsheet,
                       endpoint: "/api/contact/update",
+                      ContactId,
                     });
                   }}
                   className={`${styles["input"]} ${styles["input--submit"]}`}
@@ -104,6 +105,35 @@ function UpdateContact(
                       </div>
                     ) : (
                       <>Save</>
+                    )}
+                  </>
+                </Button>
+
+                <Button
+                  onClick={(e) => {
+                    handleFormSubmission({
+                      e,
+                      formRef,
+                      styles,
+                      nestedKeys,
+                      setLoading,
+                      setContactRefresh,
+                      closeBottomsheet,
+                      endpoint: "/api/contact/remove",
+                      ContactId,
+                    });
+                  }}
+                  className={`${styles["input"]} ${styles["input--delete"]}`}
+                >
+                  <>
+                    {loading ? (
+                      <div className={styles["wave"]}>
+                        <span className={styles["dot"]}></span>
+                        <span className={styles["dot"]}></span>
+                        <span className={styles["dot"]}></span>
+                      </div>
+                    ) : (
+                      <>Delete</>
                     )}
                   </>
                 </Button>

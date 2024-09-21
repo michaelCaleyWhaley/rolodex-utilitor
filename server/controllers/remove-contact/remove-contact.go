@@ -1,4 +1,4 @@
-package addContact
+package removeContact
 
 import (
 	"net/http"
@@ -19,24 +19,24 @@ func Controller(c *gin.Context) {
 		return
 	}
 
-	var newContact constants.Contact
-	if err := c.BindJSON(&newContact); err != nil {
+	var removedContact constants.Contact
+	if err := c.BindJSON(&removedContact); err != nil {
 		c.JSON(http.StatusForbidden, gin.H{
 			"message": "Invalid contact details.",
 		})
 		return
 	}
 
-	userData, addContactErr := database.AddContact(typedUser.Username, typedUser.Email, newContact)
+	remove, removeContactErr := database.RemoveContact(typedUser.Username, typedUser.Email, removedContact)
 
-	if addContactErr != nil {
+	if removeContactErr != nil {
 		c.JSON(http.StatusForbidden, gin.H{
-			"message": "Add contact failed.",
+			"message": "remove contact failed.",
 		})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"contacts": userData.Contacts,
+		"contacts": remove.Contacts,
 	})
 }

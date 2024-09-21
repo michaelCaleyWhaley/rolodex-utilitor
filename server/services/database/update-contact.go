@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"errors"
 	"log"
 	"utilitor/constants"
 
@@ -13,13 +14,13 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 )
 
-func (basics DynamoTable) update(UserName string, email string, newContact constants.Contact) (UserData, error) {
+func (basics DynamoTable) update(UserName string, email string, updatedList []constants.Contact) (UserData, error) {
 	contact := UserData{UserName: UserName, Email: email}
 	var contactRes UserData
 
 	expName := expression.Name("Contacts")
-	expValue := expression.Value([]constants.Contact{newContact})
-	update := expression.Set(expName, expression.ListAppend(expName, expValue))
+	expValue := expression.Value(updatedList)
+	update := expression.Set(expName, expValue)
 	expr, err := expression.NewBuilder().WithUpdate(update).Build()
 
 	if err != nil {
@@ -47,7 +48,17 @@ func (basics DynamoTable) update(UserName string, email string, newContact const
 	return contactRes, err
 }
 
-func UpdateContact(UserName string, email string, newContact constants.Contact) (UserData, error) {
+func replaceContact(contacts []constants.Contact, updatedContact constants.Contact) []constants.Contact {
+	for i, v := range contacts {
+		if v.ContactId == updatedContact.ContactId {
+			contacts[i] = updatedContact
+			break
+		}
+	}
+	return contacts
+}
+
+func UpdateContact(UserName string, email string, updatedContact constants.Contact) (UserData, error) {
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
@@ -58,8 +69,15 @@ func UpdateContact(UserName string, email string, newContact constants.Contact) 
 	dynamoTable := DynamoTable{TableName: constants.DB_TABLE_NAME,
 		DynamoDbClient: client}
 
-	userData, err := dynamoTable.update(UserName, email, newContact)
+	userData, err := dynamoTable.getUserData(UserName, email)
 
-	return userData, err
+	if len(userData.UserName) == 0 || err != nil {
+		return UserData{}, errors.New("no user found")
+	}
+
+	updatedList := replaceContact(userData.Contacts, updatedContact)
+	updatedUserData, err := dynamoTable.update(UserName, email, updatedList)
+
+	return updatedUserData, err
 
 }

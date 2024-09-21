@@ -1,10 +1,10 @@
 package updateContact
 
 import (
-	"log"
 	"net/http"
 	"utilitor/constants"
 	cogHelpers "utilitor/services/cog"
+	"utilitor/services/database"
 
 	"github.com/gin-gonic/gin"
 )
@@ -45,14 +45,16 @@ func Controller(c *gin.Context) {
 		return
 	}
 
-	log.Println("typedUser: ", typedUser)
-	log.Println("updatedContact.ContactId: ", updatedContact.ContactId)
+	update, updateContactErr := database.UpdateContact(typedUser.Username, typedUser.Email, updatedContact)
 
-	// update, _ := database.AddContact(typedUser.Username, typedUser.Email, newContact)
+	if updateContactErr != nil {
+		c.JSON(http.StatusForbidden, gin.H{
+			"message": "Update contact failed.",
+		})
+		return
+	}
 
-	// database.UpdateContact
-
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"contacts": update.Contacts,
-	// })
+	c.JSON(http.StatusOK, gin.H{
+		"contacts": update.Contacts,
+	})
 }

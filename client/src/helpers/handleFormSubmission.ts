@@ -16,6 +16,7 @@ const handleFormSubmission = async ({
   setContactRefresh,
   closeBottomsheet,
   endpoint,
+  ContactId,
 }: {
   e: MouseEvent<HTMLButtonElement>;
   formRef: RefObject<HTMLFormElement>;
@@ -26,7 +27,8 @@ const handleFormSubmission = async ({
   setLoading: (_state: boolean) => void;
   setContactRefresh: (_value: number) => void;
   closeBottomsheet: () => void;
-  endpoint: "/api/contact/add" | "/api/contact/update";
+  endpoint: "/api/contact/add" | "/api/contact/update" | "/api/contact/remove";
+  ContactId: string | undefined;
 }) => {
   e.preventDefault();
   (e.target as HTMLButtonElement).disabled = true;
@@ -35,6 +37,7 @@ const handleFormSubmission = async ({
   const inputs = formRef.current?.getElementsByTagName("input") ?? [];
   const requiredFields: Record<string, boolean> = {};
   const newContact: Partial<Contact> = {
+    ...(ContactId && { ContactId }),
     Address: { Line1: "", Line2: "", Line3: "", PostCode: "" },
   };
 

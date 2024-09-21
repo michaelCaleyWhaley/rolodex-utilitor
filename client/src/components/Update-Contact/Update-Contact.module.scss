@@ -68,6 +68,11 @@
     margin-top: 1.5rem;
     background-color: $offWhite;
   }
+
+  &--delete {
+    margin-top: 1.5rem;
+    background-color: $required;
+  }
 }
 
 .title {

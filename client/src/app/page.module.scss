@@ -71,6 +71,14 @@
   }
 }
 
+.br {
+  display: block;
+  height: 1px;
+  background-color: $border;
+  width: 100%;
+  margin: 3rem 0;
+}
+
 .demo {
   display: flex;
   width: 100%;
@@ -78,7 +86,6 @@
   flex-direction: column;
   background-image: linear-gradient($black 65%, $white);
   align-items: center;
-  margin-top: 3rem;
 
   &__text {
     display: flex;

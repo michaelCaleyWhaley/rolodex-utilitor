@@ -45,6 +45,8 @@ export default function Home() {
         />
       </section>
 
+      <div className={styles["br"]} />
+
       <section className={`${styles["demo"]} px-4 pb-4`}>
         <div className={styles["demo__text"]}>
           <h2 className={styles["h1"]}>Try Our Demo Today</h2>

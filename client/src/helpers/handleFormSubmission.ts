@@ -28,7 +28,7 @@ const handleFormSubmission = async ({
   setContactRefresh: (_value: number) => void;
   closeBottomsheet: () => void;
   endpoint: "/api/contact/add" | "/api/contact/update" | "/api/contact/remove";
-  ContactId: string | undefined;
+  ContactId?: string | undefined;
 }) => {
   e.preventDefault();
   (e.target as HTMLButtonElement).disabled = true;

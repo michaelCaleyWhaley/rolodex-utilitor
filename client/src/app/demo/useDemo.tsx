@@ -15,7 +15,11 @@ function useDemo(): {
   const [contacts, setContacts] = useState<Contact[] | null>(null);
 
   useEffect(() => {
-    setContacts(demoContacts);
+    if (sort === CONTEXT_ALPHA) {
+      setContacts(new Array(...sortContactsAlpha(demoContacts)));
+      return;
+    }
+    setContacts(new Array(...sortContactsNextService(demoContacts)));
   }, []);
 
   useEffect(() => {

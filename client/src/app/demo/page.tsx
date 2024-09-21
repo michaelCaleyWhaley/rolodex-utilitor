@@ -8,16 +8,20 @@ import { months } from "@/constants/months";
 import { CONTEXT_ALPHA, SortContext } from "@/context/sort";
 
 import styles from "./page.module.scss";
-import { useDashboard } from "./useDashboard";
+import { useDemo } from "./useDemo";
 
-export default function Dashboard() {
-  const [contactRefresh, setContactRefresh] = useState(1);
-  const { sort, setSort, contacts } = useDashboard(contactRefresh);
+export default function Demo() {
+  const [, setContactRefresh] = useState(1);
+  const { sort, setSort, contacts } = useDemo();
 
   return (
     <main className="flex flex-row">
       <SortContext.Provider value={{ sort, setSort }}>
-        <Search contacts={contacts} setContactRefresh={setContactRefresh} />
+        <Search
+          contacts={contacts}
+          setContactRefresh={setContactRefresh}
+          demo
+        />
         <ul className={`${styles["contact-list"]} py-4 min-w-0 flex-grow`}>
           {contacts &&
             contacts.map(
@@ -112,6 +116,7 @@ export default function Dashboard() {
                       NextService={NextService}
                       ContactId={ContactId}
                       setContactRefresh={setContactRefresh}
+                      demo
                     />
                   </Fragment>
                 );

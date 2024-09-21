@@ -12,9 +12,10 @@ import styles from "./Search.module.scss";
 type PropTypes = {
   contacts: Contact[] | null;
   setContactRefresh: Dispatch<SetStateAction<number>>;
+  demo?: boolean;
 };
 
-function Search({ contacts, setContactRefresh }: PropTypes) {
+function Search({ contacts, setContactRefresh, demo = false }: PropTypes) {
   const selectRef = useRef<HTMLSelectElement>(null);
   const { sort: sortContext, setSort } = useContext(SortContext);
   const isAlpha = sortContext === CONTEXT_ALPHA;
@@ -30,7 +31,7 @@ function Search({ contacts, setContactRefresh }: PropTypes) {
 
   return (
     <div className={styles["search"]}>
-      <AddContact setContactRefresh={setContactRefresh} />
+      <AddContact setContactRefresh={setContactRefresh} demo={demo} />
 
       <input className={styles["input"]} placeholder="Search..." type="text" />
 

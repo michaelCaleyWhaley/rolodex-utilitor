@@ -70,3 +70,38 @@
     }
   }
 }
+
+.demo {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  background-image: linear-gradient($black 65%, $white);
+  align-items: center;
+  margin-top: 3rem;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1300px;
+    align-items: flex-start;
+  }
+
+  &__link {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    background-color: $black;
+    color: $white;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    flex-grow: 0;
+
+    @screen md {
+      width: auto;
+      margin-bottom: 0;
+    }
+  }
+}

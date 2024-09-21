@@ -42,7 +42,7 @@ const handleFormSubmission = async ({
   };
 
   for (let i = 0; i < inputs.length; i++) {
-    const { value } = inputs[i];
+    const { value, required } = inputs[i];
     if (value.length) {
       inputs[i].classList.remove(styles["input--required"]);
       const key = inputs[i].name as keyof typeof newContact;
@@ -57,9 +57,9 @@ const handleFormSubmission = async ({
             ? parseInt(inputs[i].value, 10)
             : inputs[i].value;
       }
-      requiredFields[inputs[i].name] = true;
+      // requiredFields[inputs[i].name] = true;
       delete requiredFields[inputs[i].name];
-    } else {
+    } else if (required) {
       inputs[i].classList.add(styles["input--required"]);
       inputs[i].placeholder = "required";
       requiredFields[inputs[i].name] = true;

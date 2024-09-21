@@ -15,9 +15,12 @@ import styles from "./Update-Contact.module.scss";
 const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
 
 function UpdateContact(
-  props: Contact & { setContactRefresh: Dispatch<SetStateAction<number>> }
+  props: Contact & {
+    setContactRefresh: Dispatch<SetStateAction<number>>;
+    demo?: boolean;
+  }
 ) {
-  const { setContactRefresh, ContactId } = props;
+  const { setContactRefresh, ContactId, demo = false } = props;
   const {
     loading,
     setLoading,
@@ -82,6 +85,7 @@ function UpdateContact(
                 ))}
                 <Button
                   onClick={(e) => {
+                    if (demo) return;
                     handleFormSubmission({
                       e,
                       formRef,
@@ -111,6 +115,7 @@ function UpdateContact(
 
                 <Button
                   onClick={(e) => {
+                    if (demo) return;
                     handleFormSubmission({
                       e,
                       formRef,

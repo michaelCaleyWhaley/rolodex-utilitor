@@ -10,8 +10,10 @@ import styles from "./Add-Contact.module.scss";
 
 function AddContact({
   setContactRefresh,
+  demo,
 }: {
   setContactRefresh: Dispatch<SetStateAction<number>>;
+  demo: boolean;
 }) {
   const {
     loading,
@@ -59,6 +61,7 @@ function AddContact({
                 ))}
                 <Button
                   onClick={(e) => {
+                    if (demo) return;
                     handleFormSubmission({
                       e,
                       formRef,

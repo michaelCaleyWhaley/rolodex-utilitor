@@ -18,7 +18,7 @@ export default function Dashboard() {
     <main className="flex flex-row">
       <SortContext.Provider value={{ sort, setSort }}>
         <Search contacts={contacts} setContactRefresh={setContactRefresh} />
-        <ul className="py-4 min-w-0">
+        <ul className="py-4 min-w-0 flex-grow">
           {contacts &&
             contacts.map(
               (

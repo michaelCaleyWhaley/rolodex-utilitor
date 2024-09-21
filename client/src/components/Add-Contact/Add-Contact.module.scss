@@ -34,6 +34,7 @@
   border: solid 0.1px $border;
   margin-bottom: 0.5rem;
   width: 100%;
+  overflow: auto;
 
   &:focus-visible {
     outline: 0.2px solid $white;

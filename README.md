@@ -26,11 +26,7 @@ cloudfront: https://d12si818kne643.cloudfront.net/
 * CLIENT_SECRET is the cognito client secret.
 
 ## Todo
-
-- make fields optional
 - hide service fields?
-- favicon
-- demo page showing fake contacts on landing page
 
 https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin
 

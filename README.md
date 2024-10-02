@@ -4,8 +4,8 @@
 
 `rolodex utilitor` is a contact management application designed specifically to help companies that provide a recurring service date to their client. A specific example being an air conditioning company that attends every 6 months to clean the unit.
 
-[Visit Rolodex.](https://d12si818kne643.cloudfront.net)
-[Try the demo](https://d12si818kne643.cloudfront.net/demo)
+- [Visit Rolodex.](https://d12si818kne643.cloudfront.net)
+- [Try the demo](https://d12si818kne643.cloudfront.net/demo)
 
 ### Features
 - Saved contacts to a cloud based management app accessible from any internet connected device.

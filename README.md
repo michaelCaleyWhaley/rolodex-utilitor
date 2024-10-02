@@ -1,37 +1,30 @@
+
+
 # rolodex-utilitor
 
-Inside this project you will find two folders at root, client and server.
+`rolodex utilitor` is a contact management application designed specifically to help companies that provide a recurring service date to their client. A specific example being an air conditioning company that attends every 6 months to clean the unit.
 
-- The client houses a next js app which deploys as a static website.
-- The server is a Go api which is deployed as a lambda.
+[Visit Rolodex.](https://d12si818kne643.cloudfront.net)
+[Try the demo](https://d12si818kne643.cloudfront.net/demo)
+
+### Features
+- Saved contacts to a cloud based management app accessible from any internet connected device.
+- Filter contacts by service date.
+- Filter contacts alphabetically.
+- Search contacts by free text.
+
+## Project Structure
+The repository houses three main folders, `client`, `server` and `platform_config`.
+
+- `client` - Contains a NextJs website which is exported statically and hosted on AWS S3.
+- `server` - Contains a Go lang function that acts as a REST api for the website. This is hosted on AWS Lambda.
+- `cloud_platform` - Contains Terraform files for all the infrastructure for both `client` and `server`.
 
 ## Architecture
 
 ![architecture](./rolodex-utilitor-architecture.jpg)
 
-## Infrastructure
-
-All infra for client and server is located at root in the platform_config folder.
-
-s3 bucket name for infrastructure `rolodex-utilitor-terraform-state`.
-
-michael_caley@**\*\***.com
-
-S3: http://rolodex-utilitor-website.s3-website.eu-west-2.amazonaws.com/
-API gateway: https://nh0hmn0bzk.execute-api.eu-west-2.amazonaws.com/deployed
-cloudfront: https://d12si818kne643.cloudfront.net/
-
-## Secrets
-* CLIENT_ID is the cognito client id.
-* CLIENT_SECRET is the cognito client secret.
-
-## Todo
-- hide service fields?
-
-https://rolodex-utilitor.auth.eu-west-2.amazoncognito.com/login?client_id=65u34livlolumvk8adv9bjs2fl&response_type=code&scope=email+openid&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin
-
-https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html
-
-## Design
+## Useful links
 
 - https://v0.dev/
+- https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html

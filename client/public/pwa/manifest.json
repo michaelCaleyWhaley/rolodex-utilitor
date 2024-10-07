@@ -1,0 +1,33 @@
+{
+  "name": "Rolodex Utilitor",
+  "icons": [
+    {
+      "src": "/pwa/pwa-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/pwa/pwa-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/dashboard",
+  "display": "minimal-ui",
+  "screenshots": [
+    {
+      "src": "/pwa/pwa-screenshot-wide.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpg",
+      "form_factor": "wide",
+      "label": "Dashboard of Rolodex Utilitor"
+    },
+    {
+      "src": "/pwa/pwa-screenshot-narrow.jpg",
+      "sizes": "540x720",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "Dashboard of Rolodex Utilitor"
+    }
+  ]
+}

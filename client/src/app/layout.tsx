@@ -8,6 +8,7 @@ const inter = Manrope({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Rolodex utilitor",
   description: "Contact management solution",
+  manifest: "/pwa/manifest.json",
 };
 
 export default function RootLayout({

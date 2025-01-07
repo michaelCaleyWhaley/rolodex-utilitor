@@ -77,6 +77,12 @@ const handleFormSubmission = async ({
     "contacts",
     JSON.stringify(newContact)
   );
+
+  if (postRes === undefined) {
+    window.localStorage.clear();
+    window.location.href = "/";
+  }
+
   setLoading(false);
 
   if (!postRes?.length) return;

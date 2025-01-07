@@ -4,7 +4,8 @@ import { CONTEXT_ALPHA } from "@/context/sort";
 import { findNextService } from "@/helpers/find-next-service";
 import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
 import { sortContactsNextService } from "@/helpers/sort-contacts-next-service";
-import { useQuery } from "@/hooks/useQuery";
+import { useContactQuery } from "@/hooks/useContactQuery";
+import { useVerifyQuery } from "@/hooks/useVerifyQuery";
 import { Contact } from "@/types/contact";
 
 function useDashboard(contactRefresh: number): {
@@ -15,7 +16,7 @@ function useDashboard(contactRefresh: number): {
   const [sort, setSort] = useState(CONTEXT_ALPHA);
   const [contacts, setContacts] = useState<Contact[] | null>(null);
 
-  useQuery(
+  useContactQuery(
     contacts,
     (resp: Contact[]) => {
       const sortedResp = sortContactsAlpha(resp);
@@ -54,6 +55,8 @@ function useDashboard(contactRefresh: number): {
     setContacts(new Array(...sortContactsNextService(contacts)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort]);
+
+  useVerifyQuery("/api/verify", "verify");
 
   return { sort, setSort, contacts };
 }

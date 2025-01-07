@@ -1,0 +1,1 @@
+export { useVerifyQuery } from "./useVerifyQuery";

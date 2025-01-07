@@ -31,4 +31,5 @@ The repository houses three main folders, `client`, `server` and `platform_confi
 
 ## Pending features
 
-- Sync button allowing users to sync between devices.
+- Implement typescript linting
+- Lint for unused variables

@@ -28,3 +28,7 @@ The repository houses three main folders, `client`, `server` and `platform_confi
 
 - https://v0.dev/
 - https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html
+
+## Pending features
+
+- Sync button allowing users to sync between devices.

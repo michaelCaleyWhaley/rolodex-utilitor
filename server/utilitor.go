@@ -9,6 +9,7 @@ import (
 	"utilitor/controllers/contacts"
 	removeContact "utilitor/controllers/remove-contact"
 	updateContact "utilitor/controllers/update-contact"
+	verifytoken "utilitor/controllers/verify-token"
 	"utilitor/initialisers"
 	"utilitor/middleware"
 
@@ -23,12 +24,14 @@ var isLocal = os.Args[len(os.Args)-1] == "--local"
 
 func routes(r *gin.Engine) {
 	r.Use(middleware.CrossOrigin)
+
 	r.POST("/api/code", code.Controller)
 	r.POST("/api/contact/add", middleware.VerifyAccessToken, addContact.Controller)
 	r.POST("/api/contact/update", middleware.VerifyAccessToken, updateContact.Controller)
 	r.POST("/api/contact/remove", middleware.VerifyAccessToken, removeContact.Controller)
 
 	r.GET("/api/contact/list", middleware.VerifyAccessToken, contacts.Controller)
+	r.GET("/api/verify", middleware.VerifyAccessToken, verifytoken.Controller)
 }
 
 func init() {

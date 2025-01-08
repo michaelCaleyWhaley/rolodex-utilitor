@@ -1,14 +1,14 @@
-import "./globals.scss";
+import './globals.scss';
 
-import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import type { Metadata } from 'next';
+import { Manrope } from 'next/font/google';
 
-const inter = Manrope({ subsets: ["latin"] });
+const inter = Manrope({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Rolodex utilitor",
-  description: "Contact management solution",
-  manifest: "/pwa/manifest.json",
+  title: 'Rolodex utilitor',
+  description: 'Contact management solution',
+  manifest: '/pwa/manifest.json',
 };
 
 export default function RootLayout({

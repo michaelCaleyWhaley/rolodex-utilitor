@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import { apiUrl } from "@/config/urls";
+import { apiUrl } from '@/config/urls';
 
-import styles from "./page.module.scss";
+import styles from './page.module.scss';
 
 export default function Login() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -13,14 +13,14 @@ export default function Login() {
   useEffect(() => {
     if (!window || !codeInputRef?.current || !formRef.current) return;
     const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code") ?? "";
+    const code = urlParams.get('code') ?? '';
     codeInputRef.current.value = code;
     formRef.current.submit();
   }, []);
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-center p-24 ${styles["login"]}`}
+      className={`flex min-h-screen flex-col items-center justify-center p-24 ${styles['login']}`}
     >
       <svg
         version="1.1"
@@ -60,7 +60,7 @@ export default function Login() {
       </svg>
 
       <form
-        className={styles["form"]}
+        className={styles['form']}
         action={`${apiUrl}/code`}
         method="post"
         ref={formRef}

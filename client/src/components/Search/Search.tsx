@@ -1,19 +1,19 @@
-import { Dispatch, SetStateAction, useContext, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useRef } from 'react';
 
-import { SORT_KEY } from "@/constants/local-storage";
-import { CONTEXT_ALPHA, CONTEXT_SERVICE, SortContext } from "@/context/sort";
-import { Contact } from "@/types/contact";
+import { SORT_KEY } from '@/constants/local-storage';
+import { CONTEXT_ALPHA, CONTEXT_SERVICE, SortContext } from '@/context/sort';
+import { Contact } from '@/types/contact';
 
-import { AddContact } from "../Add-Contact";
-import { LetterList } from "../Letter-List";
-import { ServiceDateList } from "../Service-Date-List";
-import styles from "./Search.module.scss";
+import { AddContact } from '../Add-Contact';
+import { LetterList } from '../Letter-List';
+import { ServiceDateList } from '../Service-Date-List';
+import styles from './Search.module.scss';
 
-type PropTypes = {
+interface PropTypes {
   contacts: Contact[] | null;
   setContactRefresh: Dispatch<SetStateAction<number>>;
   demo?: boolean;
-};
+}
 
 function Search({ contacts, setContactRefresh, demo = false }: PropTypes) {
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -30,14 +30,14 @@ function Search({ contacts, setContactRefresh, demo = false }: PropTypes) {
   }, []);
 
   return (
-    <div className={styles["search"]}>
+    <div className={styles['search']}>
       <AddContact setContactRefresh={setContactRefresh} demo={demo} />
 
-      <input className={styles["input"]} placeholder="Search..." type="text" />
+      <input className={styles['input']} placeholder="Search..." type="text" />
 
       <select
         ref={selectRef}
-        className={styles["sort"]}
+        className={styles['sort']}
         name="sort"
         onChange={(e) => {
           window.localStorage.setItem(SORT_KEY, e.target.value);

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { Contact } from "@/types/contact";
+import { Contact } from '@/types/contact';
 
-import styles from "./Letter-List.module.scss";
+import styles from './Letter-List.module.scss';
 
-type PropTypes = { contacts: Contact[] | null };
+interface PropTypes {
+  contacts: Contact[] | null;
+}
 
 export function LetterList({ contacts }: PropTypes) {
   const [alphabet, setAlphabet] = useState<string[]>([]);
@@ -27,7 +29,7 @@ export function LetterList({ contacts }: PropTypes) {
       {alphabet &&
         alphabet.map((letter) => (
           <li key={`alpha${letter}`}>
-            <a className={styles["letter"]} href={`#${letter}`}>
+            <a className={styles['letter']} href={`#${letter}`}>
               {letter}
             </a>
           </li>

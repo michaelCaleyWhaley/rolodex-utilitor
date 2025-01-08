@@ -1,1 +1,1 @@
-export { useContactQuery } from "./useContactQuery";
+export { useContactQuery } from './useContactQuery';

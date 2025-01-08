@@ -1,18 +1,18 @@
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
-import { createPortal } from "react-dom";
+import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
+import { createPortal } from 'react-dom';
 
-import { contactFields } from "@/constants/contact";
-import { handleFormSubmission } from "@/helpers/handleFormSubmission";
-import { useContactForm } from "@/hooks/useContactForm";
-import { usePrepopulatedForm } from "@/hooks/usePrepopulatedForm";
-import { Contact } from "@/types/contact";
+import { contactFields } from '@/constants/contact';
+import { handleFormSubmission } from '@/helpers/handleFormSubmission';
+import { useContactForm } from '@/hooks/useContactForm';
+import { usePrepopulatedForm } from '@/hooks/usePrepopulatedForm';
+import { Contact } from '@/types/contact';
 
-import cogImage from "../../public/cog.svg";
-import { Button } from "../Button";
-import styles from "./Update-Contact.module.scss";
+import cogImage from '../../public/cog.svg';
+import { Button } from '../Button';
+import styles from './Update-Contact.module.scss';
 
-const nestedKeys = ["Line1", "Line2", "Line3", "PostCode"];
+const nestedKeys = ['Line1', 'Line2', 'Line3', 'PostCode'];
 
 function UpdateContact(
   props: Contact & {
@@ -35,9 +35,9 @@ function UpdateContact(
 
   return (
     <>
-      <Button className={`${styles["cog"]}`} onClick={handleBtnClick}>
+      <Button className={`${styles['cog']}`} onClick={handleBtnClick}>
         <Image
-          className={styles["cog--image"]}
+          className={styles['cog--image']}
           src={cogImage}
           alt="Dream big with our easy to use contact management system."
           width={701}
@@ -46,27 +46,27 @@ function UpdateContact(
         />
       </Button>
       {contactOpen &&
-        typeof window !== "undefined" &&
+        typeof window !== 'undefined' &&
         createPortal(
           <>
             <Button
               onClick={closeBottomsheet}
-              className={`${styles["overlay"]} ${slide ? styles["overlay--animate"] : ""}`}
+              className={`${styles['overlay']} ${slide ? styles['overlay--animate'] : ''}`}
             />
             <div
-              className={`${styles["portal"]} ${slide ? styles["portal--animate"] : ""}`}
+              className={`${styles['portal']} ${slide ? styles['portal--animate'] : ''}`}
             >
               <form ref={formRef} action="" method="post">
-                <h3 className={styles["title"]}>Update</h3>
+                <h3 className={styles['title']}>Update</h3>
                 {contactFields.map((field, index) => (
                   <div key={index}>
-                    <label className={styles["label-add"]} htmlFor={field.name}>
+                    <label className={styles['label-add']} htmlFor={field.name}>
                       {field.label}
                     </label>
 
                     {nestedKeys.includes(field.name) ? (
                       <input
-                        className={`${styles["input-add"]} ${styles["input"]}`}
+                        className={`${styles['input-add']} ${styles['input']}`}
                         type={field.type}
                         name={field.name}
                         id={field.name}
@@ -74,7 +74,7 @@ function UpdateContact(
                       />
                     ) : (
                       <input
-                        className={`${styles["input-add"]} ${styles["input"]}`}
+                        className={`${styles['input-add']} ${styles['input']}`}
                         type={field.type}
                         name={field.name}
                         id={field.name}
@@ -94,18 +94,18 @@ function UpdateContact(
                       setLoading,
                       setContactRefresh,
                       closeBottomsheet,
-                      endpoint: "/api/contact/update",
+                      endpoint: '/api/contact/update',
                       ContactId,
                     });
                   }}
-                  className={`${styles["input"]} ${styles["input--submit"]}`}
+                  className={`${styles['input']} ${styles['input--submit']}`}
                 >
                   <>
                     {loading ? (
-                      <div className={styles["wave"]}>
-                        <span className={styles["dot"]}></span>
-                        <span className={styles["dot"]}></span>
-                        <span className={styles["dot"]}></span>
+                      <div className={styles['wave']}>
+                        <span className={styles['dot']}></span>
+                        <span className={styles['dot']}></span>
+                        <span className={styles['dot']}></span>
                       </div>
                     ) : (
                       <>Save</>
@@ -124,18 +124,18 @@ function UpdateContact(
                       setLoading,
                       setContactRefresh,
                       closeBottomsheet,
-                      endpoint: "/api/contact/remove",
+                      endpoint: '/api/contact/remove',
                       ContactId,
                     });
                   }}
-                  className={`${styles["input"]} ${styles["input--delete"]}`}
+                  className={`${styles['input']} ${styles['input--delete']}`}
                 >
                   <>
                     {loading ? (
-                      <div className={styles["wave"]}>
-                        <span className={styles["dot"]}></span>
-                        <span className={styles["dot"]}></span>
-                        <span className={styles["dot"]}></span>
+                      <div className={styles['wave']}>
+                        <span className={styles['dot']}></span>
+                        <span className={styles['dot']}></span>
+                        <span className={styles['dot']}></span>
                       </div>
                     ) : (
                       <>Delete</>

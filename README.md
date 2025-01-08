@@ -33,3 +33,5 @@ The repository houses three main folders, `client`, `server` and `platform_confi
 
 - Implement typescript linting
 - Lint for unused variables
+- add zod type checking
+- add shadcn

@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { CONTEXT_ALPHA } from "@/context/sort";
-import { findNextService } from "@/helpers/find-next-service";
-import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
-import { sortContactsNextService } from "@/helpers/sort-contacts-next-service";
-import { useContactQuery } from "@/hooks/useContactQuery";
-import { useVerifyQuery } from "@/hooks/useVerifyQuery";
-import { Contact } from "@/types/contact";
+import { CONTEXT_ALPHA } from '@/context/sort';
+import { findNextService } from '@/helpers/find-next-service';
+import { sortContactsAlpha } from '@/helpers/sort-contacts-alpha';
+import { sortContactsNextService } from '@/helpers/sort-contacts-next-service';
+import { useContactQuery } from '@/hooks/useContactQuery';
+import { useVerifyQuery } from '@/hooks/useVerifyQuery';
+import { Contact } from '@/types/contact';
 
 function useDashboard(contactRefresh: number): {
   sort: string;
@@ -40,8 +40,8 @@ function useDashboard(contactRefresh: number): {
       });
       setContacts(enrichedResp);
     },
-    "/api/contact/list",
-    "contacts",
+    '/api/contact/list',
+    'contacts',
     contactRefresh
   );
 
@@ -56,7 +56,7 @@ function useDashboard(contactRefresh: number): {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sort]);
 
-  useVerifyQuery("/api/verify", "verify");
+  useVerifyQuery('/api/verify', 'verify');
 
   return { sort, setSort, contacts };
 }

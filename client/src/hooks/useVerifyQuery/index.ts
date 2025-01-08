@@ -1,1 +1,1 @@
-export { useVerifyQuery } from "./useVerifyQuery";
+export { useVerifyQuery } from './useVerifyQuery';

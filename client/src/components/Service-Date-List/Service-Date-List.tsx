@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { FUTURE_DATE } from "@/constants/future-dates";
-import { months } from "@/constants/months";
-import { Contact } from "@/types/contact";
+import { FUTURE_DATE } from '@/constants/future-dates';
+import { months } from '@/constants/months';
+import { Contact } from '@/types/contact';
 
-import styles from "./Service-Date-List.module.scss";
+import styles from './Service-Date-List.module.scss';
 
-type PropTypes = { contacts: Contact[] | null };
+interface PropTypes {
+  contacts: Contact[] | null;
+}
 
 const futureDateTime = new Date(FUTURE_DATE).getTime();
 
@@ -54,7 +56,7 @@ export function ServiceDateList({ contacts }: PropTypes) {
           if (futureDateTime === new Date(date).getTime()) {
             return (
               <li key={`alpha${date}`}>
-                <a className={styles["date"]} href="#no-service">
+                <a className={styles['date']} href="#no-service">
                   No service
                 </a>
               </li>
@@ -63,7 +65,7 @@ export function ServiceDateList({ contacts }: PropTypes) {
 
           return (
             <li key={`alpha${date}`}>
-              <a className={styles["date"]} href={`#${month}`}>
+              <a className={styles['date']} href={`#${month}`}>
                 {month}
               </a>
             </li>

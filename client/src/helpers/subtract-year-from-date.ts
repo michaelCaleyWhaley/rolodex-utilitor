@@ -1,4 +1,4 @@
-import { getLastFullYear } from "./get-last-year";
+import { getLastFullYear } from './get-last-year';
 
 export function subtractYearFromDate(dateString: string) {
   const date = new Date(dateString);

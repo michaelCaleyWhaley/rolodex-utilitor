@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Fragment, useState } from "react";
+import { Fragment, useState } from 'react';
 
-import { ContactCard } from "@/components/Contact-Card";
-import { Search } from "@/components/Search";
-import { months } from "@/constants/months";
-import { CONTEXT_ALPHA, SortContext } from "@/context/sort";
+import { ContactCard } from '@/components/Contact-Card';
+import { Search } from '@/components/Search';
+import { months } from '@/constants/months';
+import { CONTEXT_ALPHA, SortContext } from '@/context/sort';
 
-import styles from "./page.module.scss";
-import { useDemo } from "./useDemo";
+import styles from './page.module.scss';
+import { useDemo } from './useDemo';
 
 export default function Demo() {
   const [, setContactRefresh] = useState(1);
@@ -22,7 +22,7 @@ export default function Demo() {
           setContactRefresh={setContactRefresh}
           demo
         />
-        <ul className={`${styles["contact-list"]} py-4 min-w-0 flex-grow`}>
+        <ul className={`${styles['contact-list']} py-4 min-w-0 flex-grow`}>
           {contacts &&
             contacts.map(
               (
@@ -74,7 +74,7 @@ export default function Demo() {
                   <Fragment key={`firstname=${FirstName}${index}`}>
                     {showAlphaHeading && (
                       <h3
-                        className={styles["alpha-heading"]}
+                        className={styles['alpha-heading']}
                         id={currContact.LastName[0].toUpperCase()}
                       >
                         {currContact.LastName[0].toUpperCase()}
@@ -83,23 +83,23 @@ export default function Demo() {
 
                     {showServiceHeading && (
                       <h3
-                        className={styles["alpha-heading"]}
+                        className={styles['alpha-heading']}
                         id={
                           currContact.NextService
                             ? months[
                                 new Date(currContact.NextService).getMonth()
                               ]
-                            : "no-service"
+                            : 'no-service'
                         }
                       >
                         {currContact.NextService
                           ? months[new Date(currContact.NextService).getMonth()]
-                          : "no-service"}
+                          : 'no-service'}
                       </h3>
                     )}
 
                     {showNoServiceHeading && (
-                      <h3 className={styles["alpha-heading"]} id="no-service">
+                      <h3 className={styles['alpha-heading']} id="no-service">
                         No service
                       </h3>
                     )}

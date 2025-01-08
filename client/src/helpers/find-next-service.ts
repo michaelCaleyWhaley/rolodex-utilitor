@@ -1,9 +1,9 @@
-import { subtractYearFromDate } from "./subtract-year-from-date";
+import { subtractYearFromDate } from './subtract-year-from-date';
 
 export function findNextService(
   startDate: string,
   increment: number,
-  recursive: boolean = false
+  recursive = false
 ) {
   let prevYearService = new Date(startDate);
   if (!recursive) {

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { scrollLock } from "@/helpers/scroll-lock";
+import { scrollLock } from '@/helpers/scroll-lock';
 
 function useContactForm() {
   const [loading, setLoading] = useState(false);

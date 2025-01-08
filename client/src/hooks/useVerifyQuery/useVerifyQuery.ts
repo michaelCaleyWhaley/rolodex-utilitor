@@ -1,21 +1,21 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-function useVerifyQuery(endpoint: string, storageKey: string) {
+function useVerifyQuery(endpoint: string, storageKey: string): void {
   useEffect(() => {
     const lsState = window.sessionStorage.getItem(storageKey);
     if (lsState) {
       return;
     }
 
-    (async () => {
+    (async (): Promise<void> => {
       const response = await fetch(endpoint).catch(() => null);
 
       if (!response || response.status !== 200) {
         window.localStorage.clear();
-        window.location.href = "/";
+        window.location.href = '/';
         return;
       }
-      window.sessionStorage.setItem(storageKey, "true");
+      window.sessionStorage.setItem(storageKey, 'true');
     })();
   }, [endpoint, storageKey]);
 }

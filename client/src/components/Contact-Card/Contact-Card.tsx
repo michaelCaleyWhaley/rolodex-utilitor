@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
-import { type Address, Contact } from "@/types/contact";
+import { type Address, Contact } from '@/types/contact';
 
-import { UpdateContact } from "../Update-Contact";
-import styles from "./Contact-Card.module.scss";
+import { UpdateContact } from '../Update-Contact';
+import styles from './Contact-Card.module.scss';
 
 function AddressLink({ Address, text }: { Address: Address; text: string }) {
   return (
@@ -34,7 +34,7 @@ function ContactCard({
   demo?: boolean;
 }) {
   return (
-    <ul className={styles["card"]} data-contact-id={ContactId}>
+    <ul className={styles['card']} data-contact-id={ContactId}>
       <li>
         <UpdateContact
           FirstName={FirstName}
@@ -52,42 +52,42 @@ function ContactCard({
         />
       </li>
 
-      <li className={styles["first-name"]}>
+      <li className={styles['first-name']}>
         {FirstName} {LastName}
       </li>
 
       {Company && (
-        <li className={`${styles["company"]} ${styles["contact-li"]}`}>
+        <li className={`${styles['company']} ${styles['contact-li']}`}>
           {Company}
         </li>
       )}
 
       {Address.Line1 && (
-        <li className={styles["contact-li"]}>
+        <li className={styles['contact-li']}>
           <AddressLink Address={Address} text={Address.Line1} />
         </li>
       )}
 
       {Address.Line2 && (
-        <li className={styles["contact-li"]}>
+        <li className={styles['contact-li']}>
           <AddressLink Address={Address} text={Address.Line2} />
         </li>
       )}
 
       {Address.Line3 && (
-        <li className={styles["contact-li"]}>
+        <li className={styles['contact-li']}>
           <AddressLink Address={Address} text={Address.Line3} />
         </li>
       )}
 
       {Address.PostCode && (
-        <li className={styles["postcode"]}>
+        <li className={styles['postcode']}>
           <AddressLink Address={Address} text={Address.PostCode} />
         </li>
       )}
 
       {Email && (
-        <li className={styles["contact-li"]}>
+        <li className={styles['contact-li']}>
           <svg
             data-id="20"
             xmlns="http://www.w3.org/2000/svg"
@@ -103,13 +103,13 @@ function ContactCard({
           >
             <rect width="20" height="16" x="2" y="4" rx="2"></rect>
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-          </svg>{" "}
+          </svg>{' '}
           {Email}
         </li>
       )}
 
       {PhoneNo && (
-        <li className={styles["contact-li"]}>
+        <li className={styles['contact-li']}>
           <svg
             data-id="18"
             xmlns="http://www.w3.org/2000/svg"
@@ -130,19 +130,19 @@ function ContactCard({
       )}
 
       {ServiceStart && (
-        <li className={styles["service-start"]}>
+        <li className={styles['service-start']}>
           Service start: {ServiceStart}
         </li>
       )}
 
       {ServiceFreq !== 0 && ServiceFreq && (
-        <li className={styles["contact-li"]}>
+        <li className={styles['contact-li']}>
           Service freq: {ServiceFreq} monthly
         </li>
       )}
 
       {NextService && (
-        <li className={styles["contact-li"]}>Next Service: {NextService}</li>
+        <li className={styles['contact-li']}>Next Service: {NextService}</li>
       )}
     </ul>
   );

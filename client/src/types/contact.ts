@@ -1,11 +1,11 @@
-type Address = {
+interface Address {
   Line1: string;
   Line2: string;
   Line3: string;
   PostCode: string;
-};
+}
 
-type Contact = {
+interface Contact {
   FirstName: string;
   LastName: string;
   Company: string;
@@ -16,6 +16,6 @@ type Contact = {
   ServiceFreq?: number;
   NextService?: string;
   ContactId: string;
-};
+}
 
 export { type Address, type Contact };

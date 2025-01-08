@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { demoContacts } from "@/constants/demo-data";
-import { CONTEXT_ALPHA } from "@/context/sort";
-import { sortContactsAlpha } from "@/helpers/sort-contacts-alpha";
-import { sortContactsNextService } from "@/helpers/sort-contacts-next-service";
-import { Contact } from "@/types/contact";
+import { demoContacts } from '@/constants/demo-data';
+import { CONTEXT_ALPHA } from '@/context/sort';
+import { sortContactsAlpha } from '@/helpers/sort-contacts-alpha';
+import { sortContactsNextService } from '@/helpers/sort-contacts-next-service';
+import { Contact } from '@/types/contact';
 
 function useDemo(): {
   sort: string;

@@ -1,9 +1,9 @@
-import { MouseEvent, RefObject } from "react";
+import { MouseEvent, RefObject } from 'react';
 
-import { postData } from "@/services/post-data";
-import { type Contact } from "@/types/contact";
+import { postData } from '@/services/post-data';
+import { type Contact } from '@/types/contact';
 
-function reEnableBtn(e: MouseEvent<HTMLButtonElement>) {
+function reEnableBtn(e: MouseEvent<HTMLButtonElement>): void {
   (e.target as HTMLButtonElement).disabled = false;
 }
 
@@ -20,48 +20,47 @@ const handleFormSubmission = async ({
 }: {
   e: MouseEvent<HTMLButtonElement>;
   formRef: RefObject<HTMLFormElement>;
-  styles: {
-    readonly [key: string]: string;
-  };
+  styles: Readonly<Record<string, string>>;
   nestedKeys: string[];
   setLoading: (_state: boolean) => void;
   setContactRefresh: (_value: number) => void;
   closeBottomsheet: () => void;
-  endpoint: "/api/contact/add" | "/api/contact/update" | "/api/contact/remove";
+  endpoint: '/api/contact/add' | '/api/contact/update' | '/api/contact/remove';
   ContactId?: string | undefined;
 }) => {
   e.preventDefault();
   (e.target as HTMLButtonElement).disabled = true;
 
   if (!formRef) return;
-  const inputs = formRef.current?.getElementsByTagName("input") ?? [];
+  const inputs = formRef.current?.getElementsByTagName('input') ?? [];
   const requiredFields: Record<string, boolean> = {};
   const newContact: Partial<Contact> = {
     ...(ContactId && { ContactId }),
-    Address: { Line1: "", Line2: "", Line3: "", PostCode: "" },
+    Address: { Line1: '', Line2: '', Line3: '', PostCode: '' },
   };
 
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < inputs.length; i++) {
     const { value, required } = inputs[i];
     if (value.length) {
-      inputs[i].classList.remove(styles["input--required"]);
+      inputs[i].classList.remove(styles['input--required']);
       const key = inputs[i].name as keyof typeof newContact;
       const isNestedKey = nestedKeys.includes(key);
       if (isNestedKey) {
-        // @ts-expect-error
+        // @ts-expect-error type override
         newContact.Address[key] = inputs[i].value;
       } else {
-        // @ts-expect-error
+        // @ts-expect-error type override
         newContact[key] =
-          inputs[i].type === "number"
+          inputs[i].type === 'number'
             ? parseInt(inputs[i].value, 10)
             : inputs[i].value;
       }
-      // requiredFields[inputs[i].name] = true;
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete requiredFields[inputs[i].name];
     } else if (required) {
-      inputs[i].classList.add(styles["input--required"]);
-      inputs[i].placeholder = "required";
+      inputs[i].classList.add(styles['input--required']);
+      inputs[i].placeholder = 'required';
       requiredFields[inputs[i].name] = true;
     }
   }
@@ -74,13 +73,13 @@ const handleFormSubmission = async ({
   setLoading(true);
   const postRes = await postData(
     endpoint,
-    "contacts",
+    'contacts',
     JSON.stringify(newContact)
   );
 
   if (postRes === undefined) {
     window.localStorage.clear();
-    window.location.href = "/";
+    window.location.href = '/';
   }
 
   setLoading(false);

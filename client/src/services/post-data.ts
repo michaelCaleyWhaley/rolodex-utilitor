@@ -1,6 +1,6 @@
 async function postData(endpoint: string, storageKey: string, body: BodyInit) {
   const response = await fetch(endpoint, {
-    method: "POST",
+    method: 'POST',
     body,
   }).catch(() => null);
 
@@ -9,7 +9,7 @@ async function postData(endpoint: string, storageKey: string, body: BodyInit) {
   }
 
   const json = await response?.json().catch(() => null);
-  
+
   const resContacts = json?.contacts;
 
   if (resContacts) {

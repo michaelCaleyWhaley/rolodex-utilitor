@@ -1,16 +1,16 @@
-import react from "react";
+import react from 'react';
 
 function Button({
   text,
   className,
   onClick,
-  type = "button",
+  type = 'button',
   children,
 }: {
   text?: string;
   className?: string;
   onClick: (_e: react.MouseEvent<HTMLButtonElement>) => void;
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   children?: react.ReactElement;
 }) {
   return (

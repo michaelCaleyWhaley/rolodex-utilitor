@@ -1,1 +1,1 @@
-export const SORT_KEY = "contact-sort";
+export const SORT_KEY = 'contact-sort';
